@@ -1,150 +1,43 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<unistd.h>
 #include<pthread.h>
-#define CAPACITY 4
+#define NUMBER 10000000
 
-char buffer1[CAPACITY];
-char buffer2[CAPACITY];
-int in1,out1;
-int in2,out2;
+double PI;
+double worker_output;
+double master_output;
 
-int buffer_is_empty(int index){
-    if(index == 1)
-        return in1 == out1;
-    if(index == 2)
-        return in2 == out2;
-    else
-        printf("Don`t exist this buffer!,Empty");
-}
-
-int buffer_is_full(int index){
-    if(index == 1)
-        return (in1 + 1) % CAPACITY == out1;
-    if(index == 2)
-        return (in2 + 1) % CAPACITY == out2;
-    else
-        printf("Don`t exist this buffer!,Full");
-}   
-char get_item(int index){
-    char item;
-    if(index == 1){
-        item = buffer1[out1];
-        out1 = (out1 + 1) % CAPACITY;
-    }
-    if(index == 2){
-        item = buffer2[out2];
-        out2 = (out2 + 1) % CAPACITY;
-    }
-    //else
-    //  printf("Don`t exist this buffer!,Get%d\n",index);
-    return item;
-}
-
-void put_item(char item, int index){
-    if(index == 1){
-        buffer1[in1] = item;
-        in1 = (in1 + 1) % CAPACITY;
-    }
-    if(index == 2){
-        buffer2[in2] = item;
-        in2 = (in2 + 1) % CAPACITY;
-    }
-    //else
-    //    printf("Don`t exist this buffer!Put%c  %d\n",item,index);
-}
-
-pthread_mutex_t mutex;
-pthread_cond_t wait_empty_buffer1;
-pthread_cond_t wait_full_buffer1;
-pthread_cond_t wait_empty_buffer2;
-pthread_cond_t wait_full_buffer2;
-
-
-volatile int global = 0;
-
-#define ITEM_COUNT 8
-
-void *produce(void *arg){
+void *worker(void *arg){
     int i;
-    char item;
-    
-    for(i = 0;i < ITEM_COUNT;i++){
-        pthread_mutex_lock(&mutex);
-        while(buffer_is_full(1))
-            pthread_cond_wait(&wait_empty_buffer1, &mutex);
-        item = 'a' + i;
-        put_item(item,1);
-        printf("produce item:%c\n",item);
-
-        pthread_cond_signal(&wait_full_buffer1);
-        pthread_mutex_unlock(&mutex);
+    worker_output = 0;
+    for(i = 1; i <= NUMBER;i++){
+        if(i % 2 == 0)
+            worker_output -= 1/(2*(double)i - 1);
+        else
+            worker_output += 1/(2*(double)i - 1);
     }
-    return NULL;
-}
-void *compute(void *arg){
-    int i;
-    char item;
-    for(i = 0;i < ITEM_COUNT;i++){
-        pthread_mutex_lock(&mutex);
-        while(buffer_is_empty(1))
-            pthread_cond_wait(&wait_full_buffer1, &mutex);
-        item = get_item(1);
-        printf("    compute get item:%c\n",item);
-        pthread_cond_signal(&wait_empty_buffer1);
-        pthread_mutex_unlock(&mutex);
-
-        item -= 32;
-
-        while(buffer_is_full(2))
-            pthread_cond_wait(&wait_empty_buffer2, &mutex);
-        put_item(item,2);
-        printf("    compute put item:%c\n", item);
-        pthread_cond_signal(&wait_full_buffer2);
-        pthread_mutex_unlock(&mutex);
-    }
-    return NULL;
+	printf("worker_ouput = %.10lf\n",worker_output);
 }
 
-void *consume(void *arg){
+void master(){
     int i;
-    char item;
-    for(i = 0;i < ITEM_COUNT;i++){
-        pthread_mutex_lock(&mutex);
-        while(buffer_is_empty(2))
-            pthread_cond_wait(&wait_full_buffer2, &mutex);
-        item = get_item(2);
-        printf("            comsume item:%c\n", item);
-
-        pthread_cond_signal(&wait_empty_buffer2);
-        pthread_mutex_unlock(&mutex);
+    master_output = 0;
+    for(i = NUMBER + 1;i <= NUMBER*2;i++){
+        if(i % 2 == 0)
+            master_output -= 1 / (2 * (double)i - 1);
+        else
+            master_output += 1 / (2 * (double)i - 1);
     }
-    return NULL;
+	printf("master_output = %.10lf\n",master_output);
 }
 
-int main(){
-    int i;
-    in1 = 0;
-    in2 = 0;
-    out1 = 0;
-    out2 = 0;
-    pthread_t tids[2];
-    pthread_create(&tids[0],NULL,compute,NULL);
-    pthread_create(&tids[1],NULL,consume,NULL);
-
-    pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&wait_empty_buffer1, NULL); 
-    pthread_cond_init(&wait_full_buffer1, NULL);
-    pthread_cond_init(&wait_empty_buffer2, NULL);
-    pthread_cond_init(&wait_full_buffer2, NULL);
-   
-    
-    produce(NULL);
-    
-    for(i = 0;i < 2;i++)
-        pthread_join(tids[i],NULL);
-    pthread_mutex_destroy(&mutex);
-    
-
+int main()
+{
+    pthread_t worker_tid;
+    pthread_create(&worker_tid, NULL, &worker, NULL);
+    master();
+    pthread_join(worker_tid,NULL);
+    PI = (worker_output + master_output) * 4;
+    printf("PI:%lf\n",PI);
     return 0;
 }

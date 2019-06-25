@@ -4,19 +4,23 @@
 #include<sys/wait.h>
 #include<sys/types.h>
 
-void mysys(char *command)
+int mysys(char *command)
 {
+	if(command[0] == '\0')
+	{
+		printf("command not found!\n");
+		return 127; // "command not found!"
+	}
     int pid;
     pid = fork();
     if(pid == 0)
     {
-        
-        
         char *argv[100];
         char *token;
         char cmd[sizeof(command) + 1];
         strcpy(cmd, command);
     
+		//get first substr
         token = strtok(cmd, " ");
         int count = 0;
         while(token != NULL)
@@ -29,7 +33,6 @@ void mysys(char *command)
     }
     else
         wait(NULL);
-
 }
 
 int main()

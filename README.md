@@ -221,8 +221,103 @@ cdrom  etc   initrd.img.old  media	 proc  sbin  sys   var
 --------------------------------------------------
 ```
 #### 2.1.1 mysys实验代码
+```
+#include<stdio.h>
+#include<string.h>
+#include<unistd.h>
+#include<sys/wait.h>
+#include<sys/types.h>
+
+int mysys(char *command)
+{
+	if(command[0] == '\0')
+	{
+		printf("command not found!\n");
+		return 127; // "command not found!"
+	}
+    int pid;
+    pid = fork();
+    if(pid == 0)
+    {
+        char *argv[100];
+        char *token;
+        char cmd[sizeof(command) + 1];
+        strcpy(cmd, command);
+    
+		//get first substr
+        token = strtok(cmd, " ");
+        int count = 0;
+        while(token != NULL)
+        {
+            argv[count++] = token;
+            token = strtok(NULL," "); 
+        }
+        argv[count] = 0;
+        execvp(argv[0],argv);
+    }
+    else
+        wait(NULL);
+}
+
+int main()
+{
+	mysys("");
+    printf("-------------------------------------------\n");
+	mysys("pwd");
+
+	printf("-------------------------------------------\n");
+	mysys("ls");
+
+    printf("-------------------------------------------\n");
+    mysys("echo HELLO WORLD");
+    
+    printf("-------------------------------------------\n");
+    mysys("ls /");
+
+    printf("-------------------------------------------\n");
+    return 0;
+}
+```
 #### 2.1.2 mysys实验结果
+![mysys.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12546b0072e.png)
 #### 2.1.3 mysys实验思路
+1.先验知识
+
+(1) execvp函数
+
+int execvp(const char *file, char * const argv []);
+
+execvp()会从PATH 环境变量所指的目录中查找符合参数file 的文件名, 找到后便执行该文件, 然后将第二个参数argv 传给该欲执行的文件
+
+(2) strtok函数
+
+char *strtok(char *str, const char *delim) 
+
+str -- 要被分解成一组小字符串的字符串
+
+delim -- 包含分隔符的 C 字符串。
+
+该函数返回被分解的第一个子字符串，如果没有可检索的字符串，则返回一个空指针。
+
+(3) fork函数
+
+pid_t fork(void);
+
+pid是进程ID的缩写，pid_t是使用typedef定义的进程ID类型
+
+父进程从fork返回处继续执行，在父进程中，fork返回子进程PID
+
+子进程从fork返回处开始执行，在子进程中，fork返回0
+
+2.实验思路
+
+(1) 首先判断命令是否合法，经过对传入的命令字符数组的首个字符串进行判断，若不存在则打印错误信息并return 127(返回127是指command not found!)
+
+(2) 然后进行fork产生子进程，在子进程中完成对execvp函数的调用，其中若(pid==0)表达式为真，即当前进程为子进程。
+
+(3) 在子进程中对传入的字符串进行分割，这里用到了strtok函数对空格进行分割，将其分割后的子字符串存入argv字符数组中，然后调用execvp函数，传入命令及argv字符串进行系统调用。
+
+(4) 父进程中等待子进程完成后退出mysys函数。
 
 ### 2.2 sh1.c
 * 该程序读取用户输入的命令，调用函数mysys(上一个作业)执行用户的命令，示例如下
@@ -244,8 +339,12 @@ daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
 ```
 * 请考虑如何实现内置命令cd、pwd、exit
-#### 2.1.1 sh1实验代码
-#### 2.1.2 sh1实验思路
+#### 2.2.1 sh1实验代码
+```
+
+```
+#### 2.2.2 sh1实验结果
+#### 2.2.3 sh1实验思路
 
 ### 2.3 sh2.c: 实现shell程序，要求在第1版的基础上，添加如下功能
 * 实现文件重定向
@@ -288,7 +387,8 @@ $ cat output.txt
 3
 ```
 #### 2.4.1 sh3实验代码
-#### 2.4.2 sh3实验思路
+#### 2.4.2 sh3实验结果
+#### 2.4.3 sh3实验思路
 
 # 3. 多线程题目
 
@@ -299,7 +399,57 @@ $ cat output.txt
 * 辅助线程计算级数的后半部分
 * 主线程等待辅助线程运行結束后,将前半部分和后半部分相加
 #### 3.1.1 pi1实验代码
-#### 3.1.2 pi1实验思路
+```
+#include<stdio.h>
+#include<unistd.h>
+#include<pthread.h>
+
+#define NUMBER 100000
+
+double PI;
+double worker_output;
+double master_output;
+
+void *worker(void *arg){
+    int i;
+    worker_output = 0;
+    for(i = 1; i <= NUMBER;i++){
+        if(i % 2 == 0)
+            worker_output -= 1/(2*(double)i - 1);
+        else
+            worker_output += 1/(2*(double)i - 1);
+    }
+}
+
+void master(){
+    int i;
+    master_output = 0;
+    for(i = NUMBER + 1;i <= NUMBER*2;i++){
+        if(i % 2 == 0)
+            master_output -= 1 / (2 * (double)i - 1);
+        else
+            master_output += 1 / (2 * (double)i - 1);
+    }
+}
+
+int main()
+{
+    pthread_t worker_tid;
+    pthread_create(&worker_tid, NULL, &worker, NULL);
+    master();
+    pthread_join(worker_tid,NULL);
+    PI = (worker_output + master_output) * 4;
+    printf("PI:%lf\n",PI);
+    return 0;
+}
+
+```
+#### 3.1.2 pi1实验结果
+![pi1.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127298c4ae7.png)
+#### 3.1.3 pi1实验思路
+(1)使用两个线程计算 PI，主线程计算前半部分，辅助线程计算后半部分。将最后的计算结果相加后乘以 4 得到 PI 的估计值。采用 pthread_create 函数创建辅助线程，使用pthread_join 函数等待辅助线程结束。
+
+(2)worker和master函数分别计算级数的后半段和前半段，迭代次数NUMBER越大，数字越精确。
 
 ### 3.2 pi2.c: 使用N个线程根据莱布尼兹级数计算PI
 * 与上一题类似，但本题更加通用化，能适应N个核心，需要使用线程参数来实现
@@ -307,7 +457,78 @@ $ cat output.txt
 * 每个辅助线程计算一部分任务，并将结果返回
 * 主线程等待N个辅助线程运行结束，将所有辅助线程的结果累加
 #### 3.2.1 pi2实验代码
-#### 3.2.2 pi2实验思路
+```
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<pthread.h>
+
+#define NUMBER 100000
+#define N 100
+
+double PI;
+struct param{
+    int start;
+    int end;
+};
+
+struct result{
+    double worker_output;
+};
+
+void *worker(void *arg){
+    int i;
+    struct param *param;
+    struct result *result;
+    double worker_output = 0;
+    param = (struct param *) arg;
+
+    for(i = param->start; i <= param->end;i++){
+        if(i % 2 == 0)
+            worker_output -= 1/(2*(double)i - 1);
+        else
+            worker_output += 1/(2*(double)i - 1);
+    }
+    result = malloc(sizeof(struct result));
+    result->worker_output = worker_output;
+	printf("worker %d = %.10lf\n",param->start / NUMBER, worker_output);
+    return result;
+}
+
+
+int main()
+{
+    int i;
+    pthread_t worker_tids[N];
+    struct param params[N];
+    PI = 0.0;
+
+    for(i = 0; i < N;i++){
+        struct param *param;
+        param = &params[i];
+        param->start =i * NUMBER + 1;
+        param->end = (i+1) * NUMBER;
+        pthread_create(&worker_tids[i], NULL, worker, param);
+    }
+    
+    for(i = 0;i < N;i++){
+        struct result *result;
+        pthread_join(worker_tids[i],(void **)&result);
+        PI += result->worker_output;
+        free(result);
+    }
+    PI = PI * 4;
+    printf("PI:%.10lf\n",PI);
+    return 0;
+}
+```
+#### 3.2.2 pi2实验结果
+![pi2-2.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127466c0a48.png)
+![pi2-1.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127466c4c6d.png)
+#### 3.2.3 pi2实验思路
+(1) 主线程采用 for 循环产生 100 个线程来计算 PI。每个线程计算 1/100 的部分，计算起止点作为pthread_create函数的参数param传入辅助线程的线程入口函数。在Worker函数中，通过param = (struct param *) arg来接收传过来的param结构体。
+
+(2) 主线程采用 for 循环，将每个辅助线程的计算结果利用 pthread_join 函数接受线程入口函数的返回值result,然后获得每一个worker的worker_output在进行相加得到PI的值。
 
 ### 3.3 sort.c: 多线程排序
 * 主线程创建一个辅助线程
@@ -315,7 +536,8 @@ $ cat output.txt
 * 辅助线程使用选择排序算法对数组的后半部分排序
 * 主线程等待辅助线程运行結束后,使用归并排序算法归并数组的前半部分和后半部分
 #### 3.3.1 sort实验代码
-#### 3.3.2 sort实验思路
+#### 3.3.2 sort实验结果
+#### 3.3.3 sort实验思路
 
 ### 3.4 pc1.c: 使用条件变量解决生产者、计算者、消费者问题
 * 系统中有3个线程：生产者、计算者、消费者
@@ -324,12 +546,14 @@ $ cat output.txt
 * 计算者从buffer1取出字符，将小写字符转换为大写字符，放入到buffer2
 * 消费者从buffer2取出字符，将其打印到屏幕上
 #### 3.4.1 pc1实验代码
-#### 3.4.2 pc2实验思路
+#### 3.4.2 pc2实验结果
+#### 3.4.3 pc2实验思路
 
 ### 3.5 pc2.c: 使用信号量解决生产者、计算者、消费者问题
 * 功能和前面的实验相同，使用信号量解决
 #### 3.5.1 pc2实验代码
-#### 3.5.2 pc2实验思路
+#### 3.5.2 pc2实验结果
+#### 3.5.3 pc2实验思路
 
 ### 3.6 ring.c: 创建N个线程，它们构成一个环
 * 创建N个线程：T1、T2、T3、… TN
@@ -342,4 +566,5 @@ $ cat output.txt
 * TN收到后将整数加1
 * TN向T1发送整数N
 #### 3.6.1 ring实验代码
-#### 3.6.2 ring实验思路
+#### 3.6.2 ring实验结果
+#### 3.6.3 ring实验思路

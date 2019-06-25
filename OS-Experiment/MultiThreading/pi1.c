@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<pthread.h>
-#define NUMBER 100000
+
+#define NUMBER 10000000
 
 double PI;
 double worker_output;
@@ -16,6 +17,7 @@ void *worker(void *arg){
         else
             worker_output += 1/(2*(double)i - 1);
     }
+    printf("worker_output = %d\n",worker_output);
 }
 
 void master(){
@@ -38,6 +40,4 @@ int main()
     PI = (worker_output + master_output) * 4;
     printf("PI:%lf\n",PI);
     return 0;
-
-
 }
