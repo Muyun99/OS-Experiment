@@ -125,8 +125,66 @@ daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
 ...
 ```
+
 #### 1.3.1 mycp实验代码
-#### 1.3.2 mycp实验思路
+
+```
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<string.h>
+#include<stdlib.h>
+#include<fcntl.h>
+#include<unistd.h>
+#include<stdio.h>
+
+int main(int argc, char *argv[])
+{
+    if(argc != 3)
+	{
+		printf("please check your format, the right format:cp file_src file_target\n");
+		exit(0);
+	}
+
+    char *sourcePath = argv[1];
+    char *targetPath = argv[2];
+
+    int fd1 = open(sourcePath, O_RDONLY);
+    int fd2 = open(targetPath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+
+	if(fd1 == -1)
+	{
+		printf("open %s error!",sourcePath);
+		exit(0);
+	}
+	if(fd2 == -1)
+	{
+		printf("open %s error!",targetPath);
+		exit(0);
+	}
+    char buf[1];
+    int count;
+
+    while (read(fd1, buf,1))
+    {
+        write(fd2, buf, 1);
+    }
+    close(fd1);
+    close(fd2);
+    return 0;
+}
+
+```
+#### 1.3.2 mycp实验结果
+![mycp.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12482f41037.png)
+#### 1.3.3 mycp实验思路
+1.首先对命令格式与文件是否正常打开进行判断
+
+当命令后跟的参数数量少于3个时候，提醒用户输入格式错误，并退出当前程序。当文件打开错误时，也提醒用户打开文件失败，并退出当前程序。这里需要注意的点是，在打开目标文件时，若目标文件不存在应该创建一个新文件(O_CREAT)，并且为了能够后续操作，将其权限赋为默认权限：664权限。
+
+2.进行复制
+
+当文件都正常打开时，按照以往的方法进行复制。调用read函数对源文件逐个读取，当其返回的字符个数为1时，调用write函数写入目标文件中。
+
 
 # 2. 多进程题目
 ### 2.1 mysys.c: 实现函数mysys，用于执行一个系统命令，要求如下
@@ -163,7 +221,8 @@ cdrom  etc   initrd.img.old  media	 proc  sbin  sys   var
 --------------------------------------------------
 ```
 #### 2.1.1 mysys实验代码
-#### 2.1.2 mysys实验思路
+#### 2.1.2 mysys实验结果
+#### 2.1.3 mysys实验思路
 
 ### 2.2 sh1.c
 * 该程序读取用户输入的命令，调用函数mysys(上一个作业)执行用户的命令，示例如下
