@@ -6,15 +6,28 @@
 
 int main(int argc, char *argv[])
 {
-    pid_t pid;
-    int fd;
-
-    fd = open(argv[1], O_RDONLY);
-    
-    char buf[2000];
-    int count = read(fd, buf, sizeof(buf));
-    buf[count] = 0;
-    puts(buf);
-    
+	int fd;
+	char c[1];
+    if(argc == 1)
+	{
+		while(read(0,c,1))
+			write(1,c,1);
+	}
+	else
+	{
+		int i = 0;
+		for(i = 1;i < argc;i++)
+		{
+		    fd = open(argv[i], O_RDONLY);
+			if(fd == -1) //file open error
+			{
+				printf("mycat: %s:No such file or directory\n", argv[i]);
+				continue;
+			}
+			while(read(fd,c,1))
+				write(1,c,1);
+			close(fd);
+		}
+    }
     return 0;
 }

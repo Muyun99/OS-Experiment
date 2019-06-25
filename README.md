@@ -10,7 +10,35 @@ $ ./myecho a b c
 a b c
 ```
 #### 1.1.1 myecho实验代码
-#### 1.1.2 myecho实验思路
+```
+#include<stdio.h>
+
+int main(int argc, char *argv[])
+{
+    int i = 0;
+    for(i = 1; i < argc; i++)
+        printf("%s ",argv[i]);
+    printf("\n");
+    return 0;
+}
+```
+#### 1.1.2 myecho实验结果
+![myecho.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/25/5d1230a55ff6e.png)
+
+#### 1.1.3 myecho实验思路
+1.实验预备知识
+
+(1) main函数的参数有argc和argv两个参数
+
+(2) int argc(arguments count)  
+argc表示运行程序传送给main函数的命令行参数总个数，包括可执行程序名，其中当argc=1时表示只有一个程序名称，此时存储在argv[0]中
+
+(3) char *argv[](arguments value/vecotr)  
+argv是一个字符串数组，用来存放指向字符串参数的指针数组，每个元素只想一个参数，空格分割参数，其长度为argc。数组下标从0开始，argv[argc] = NULL。
+
+2.实验思路
+使用main函数的argv与argc传递参数，命令行输入的字符串会被分割为字符串数组。用argc作为循环变量，输出argv字符串数组中的值，注意用空格分隔即可。需要注意的是：argv[0]中存储的是程序名称，这里不应该被输出，所以下标应从1开始。
+
 
 ### 1.2 mycat.c
 * mycat.c的功能与系统cat程序相同
@@ -29,7 +57,56 @@ bin:x:2:2:bin:/bin:/usr/sbin/nologin
 ...
 ```
 #### 1.2.1 mycat实验代码
-#### 1.2.2 mycat实验思路
+```
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<fcntl.h>
+#include<unistd.h>
+#include<stdio.h>
+
+int main(int argc, char *argv[])
+{
+	int fd;
+	char c[1];
+    if(argc == 1)
+	{
+		while(read(0,c,1))
+			write(1,c,1);
+	}
+	else
+	{
+		int i = 0;
+		for(i = 1;i < argc;i++)
+		{
+		    fd = open(argv[i], O_RDONLY);
+			if(fd == -1)    //file open error，output error message
+			{
+				printf("mycat: %s:No such file or directory\n", argv[i]);
+				continue;
+			}
+			while(read(fd,c,1))
+				write(1,c,1);
+			close(fd);
+		}
+    }
+    return 0;
+}
+
+```
+#### 1.2.2 mycat实验结果
+![mycat.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/25/5d123f0e6bd4f.png)
+#### 1.2.3 mycat实验思路
+1.cat 命令后可不接参数
+
+基于此想法，当命令后参数数量为0(即argc为1时)，我们将接收到的字符串进行原样不动的输出。
+
+read(0,c,1)表示从标准输入中读取字符数组
+
+write(1,c,1)表示将读取的字符数组写到标准输出中去
+
+2.cat 命令后可接多个参数
+
+基于此想法，当命令后参数数量不为0是(即argc>1时)，我们对argv中的文件名进行逐个访问并打开，最后调用read与write函数将当前文件的字符写到标准输出中去。值得注意的是，如果文件夹名字不合法(即open函数返回为-1)，则应输出报错信息。
 
 ### 1.3 mycp.c
 * mycp.c的功能与系统cp程序相同  
