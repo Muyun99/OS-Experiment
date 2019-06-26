@@ -525,6 +525,7 @@ int main()
 #### 3.2.2 pi2实验结果
 ![pi2-2.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127466c0a48.png)
 ![pi2-1.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127466c4c6d.png)
+
 #### 3.2.3 pi2实验思路
 (1) 主线程采用 for 循环产生 100 个线程来计算 PI。每个线程计算 1/100 的部分，计算起止点作为pthread_create函数的参数param传入辅助线程的线程入口函数。在Worker函数中，通过param = (struct param *) arg来接收传过来的param结构体。
 
@@ -546,12 +547,324 @@ int main()
 * 计算者从buffer1取出字符，将小写字符转换为大写字符，放入到buffer2
 * 消费者从buffer2取出字符，将其打印到屏幕上
 #### 3.4.1 pc1实验代码
+```
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<pthread.h>
+#define CAPACITY 4
+
+char buffer1[CAPACITY];
+char buffer2[CAPACITY];
+int in1,out1;
+int in2,out2;
+
+int buffer_is_empty(int index){
+    if(index == 1)
+        return in1 == out1;
+    if(index == 2)
+        return in2 == out2;
+    else
+        printf("Don`t exist this buffer!,Empty");
+}
+
+int buffer_is_full(int index){
+    if(index == 1)
+        return (in1 + 1) % CAPACITY == out1;
+    if(index == 2)
+        return (in2 + 1) % CAPACITY == out2;
+    else
+        printf("Don`t exist this buffer!,Full");
+}   
+char get_item(int index){
+    char item;
+    if(index == 1){
+        item = buffer1[out1];
+        out1 = (out1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        item = buffer2[out2];
+        out2 = (out2 + 1) % CAPACITY;
+    }
+    //else
+    //  printf("Don`t exist this buffer!,Get%d\n",index);
+    return item;
+}
+
+void put_item(char item, int index){
+    if(index == 1){
+        buffer1[in1] = item;
+        in1 = (in1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        buffer2[in2] = item;
+        in2 = (in2 + 1) % CAPACITY;
+    }
+    //else
+    //    printf("Don`t exist this buffer!Put%c  %d\n",item,index);
+}
+
+pthread_mutex_t mutex1,mutex2;
+pthread_cond_t wait_empty_buffer1;
+pthread_cond_t wait_full_buffer1;
+pthread_cond_t wait_empty_buffer2;
+pthread_cond_t wait_full_buffer2;
+
+
+volatile int global = 0;
+
+#define ITEM_COUNT 8
+
+void *produce(void *arg){
+    int i;
+    char item;
+    
+    for(i = 0;i < ITEM_COUNT;i++){
+        pthread_mutex_lock(&mutex1);
+        while(buffer_is_full(1))
+            pthread_cond_wait(&wait_empty_buffer1, &mutex1);
+        item = 'a' + i;
+        put_item(item,1);
+        printf("produce item:%c\n",item);
+
+        pthread_cond_signal(&wait_full_buffer1);
+        pthread_mutex_unlock(&mutex1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+        pthread_mutex_lock(&mutex1);
+        while(buffer_is_empty(1))
+            pthread_cond_wait(&wait_full_buffer1, &mutex1);
+        item = get_item(1);
+        //printf("    compute get item:%c\n",item);
+        pthread_cond_signal(&wait_empty_buffer1);
+        pthread_mutex_unlock(&mutex1);
+
+        item -= 32;
+
+		pthread_mutex_lock(&mutex2);
+        while(buffer_is_full(2))
+            pthread_cond_wait(&wait_empty_buffer2, &mutex2);
+        put_item(item,2);
+        printf("    compute put item:%c\n", item);
+        pthread_cond_signal(&wait_full_buffer2);
+        pthread_mutex_unlock(&mutex2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+        pthread_mutex_lock(&mutex2);
+        while(buffer_is_empty(2))
+            pthread_cond_wait(&wait_full_buffer2, &mutex2);
+        item = get_item(2);
+        printf("            comsume item:%c\n", item);
+
+        pthread_cond_signal(&wait_empty_buffer2);
+        pthread_mutex_unlock(&mutex2);
+    }
+    return NULL;
+}
+
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+	pthread_create(&tids[0],NULL,produce,NULL);
+    pthread_create(&tids[1],NULL,compute,NULL);
+    pthread_create(&tids[2],NULL,consume,NULL);
+
+    pthread_mutex_init(&mutex1, NULL);
+	pthread_mutex_init(&mutex2, NULL);
+    pthread_cond_init(&wait_empty_buffer1, NULL); 
+    pthread_cond_init(&wait_full_buffer1, NULL);
+    pthread_cond_init(&wait_empty_buffer2, NULL);
+    pthread_cond_init(&wait_full_buffer2, NULL);
+    
+    for(i = 0;i < 3;i++)
+        pthread_join(tids[i],NULL);
+    pthread_mutex_destroy(&mutex1);
+	pthread_mutex_destroy(&mutex2);
+    
+
+    return 0;
+}
+```
 #### 3.4.2 pc2实验结果
+
+![pc1.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12dae722aa3.png)
+
 #### 3.4.3 pc2实验思路
+1.先验知识
+
+(1) pthread_mutex_t 与 pthread_cond_t
+
+类型名|类型功能|声明原型|声明示例
+--|--|--|--
+pthread_mutex_t | 声明一个互斥锁(用于线程互斥) | typedef void *pthread_mutex_t | pthread_mutex_t mutex1,mutex2;
+pthread_cond_t | 声明一个条件变量(用于线程同步) | typedef void *pthread_mutex_t | pthread_cond_t wait_empty_buffer1;
+
+(2) pthread_mutex_lock() 和 pthread_mutex_unlock()
+
+函数名|函数功能|函数原型|函数示例
+--|--|--|--
+pthread_mutex_lock() | 对互斥锁加锁 | int pthread_mutex_lock(pthread_mutex_t *m) | pthread_mutex_lock(&mutex1); 
+pthread_mutex_unlock() | 对互斥锁解锁 | int pthread_mutex_unlock(pthread_mutex_t *m) | pthread_mutex_unlock(&mutex1);
+
+(3) pthread_cond_wait() 和 pthread_cond_signal()
+
+函数名|函数功能|函数原型|函数示例
+--|--|--|--
+pthread_cond_wait() | 无条件等待 | int pthread_cond_wait(pthread_cond_t *cv, pthread_mutex_t *external_mutex) | pthread_cond_wait(&wait_empty_buffer1, &mutex1);
+pthread_cond_signal() | 激活等待的线程 | int pthread_cond_wait(pthread_cond_t *cv, pthread_mutex_t *external_mutex) | pthread_cond_signal(&wait_full_buffer1);
+
+(4) pthread_mutex_init()、pthread_mutex_destroy() 和 pthread_cond_init()
+
+函数名|函数功能|函数原型|函数示例
+--|--|--|--
+pthread_mutex_init() | 互斥锁的初始化 |int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t * attr) |pthread_mutex_init(&mutex1, NULL);
+pthread_mutex_destory() | 互斥锁的释放 | int pthread_mutex_destroy(pthread_mutex_t *m) | pthread_mutex_destroy(&mutex1);
+pthread_cond_init() | 条件变量的初始化 | int pthread_cond_init(pthread_cond_t *cv, const pthread_condattr_t *a) |thread_cond_init(&wait_empty_buffer1, NULL); 
+
+
+
+(5) pthread_create() 和 pthread_join()
+
+函数名|函数功能|函数原型|函数示例
+--|--|--|--
+pthread_create() | 线程的创建 | int pthread_create(pthread_t *th, const pthread_attr_t *attr, void *(*func)(void *), void *arg) | pthread_create(&tids,NULL,produce,NULL);
+pthread_join()| 用于等待一个线程的结束,线程间同步的操作 |int pthread_join(pthread_t t, void **res) | pthread_join(tids,NULL);
+
+
+
+2.实验思路
+
+(1) 定义两个容量为4的buffer：buffer1与buffer2。计算者从buffer1取出字符，将小写字符转换为大写字符，放入到buffer2。消费者从buffer2取出字符，将其打印到屏幕上。定义互斥信号量用于进程间互斥，定义条件变量用于进程间同步
+```
+#define CAPACITY 4                  //缓冲区的大小
+#define ITEM_COUNT 8                //字符的数量
+char buffer1[CAPACITY]; 
+char buffer2[CAPACITY];
+int in1,out1;                       //定义当前buffer1的读指针和写指针
+int in2,out2;                       //定义当前buffer2的读指针和写指针
+pthread_mutex_t mutex1,mutex2;      //定义互斥信号量
+pthread_cond_t wait_empty_buffer1; 
+pthread_cond_t wait_full_buffer1;   //定义条件变量用于produce与compute之间的同步
+pthread_cond_t wait_empty_buffer2;
+pthread_cond_t wait_full_buffer2;   //定义条件变量用于compute与consume之间的同步
+```
+
+(2) produce程序作为buffer1的生产者，在操作之前给buffer1加锁并将数据存入。
+```
+void *produce(void *arg){
+    int i;
+    char item;
+    
+    for(i = 0;i < ITEM_COUNT;i++){
+        pthread_mutex_lock(&mutex);                         //对互斥锁进行加锁
+        while(buffer_is_full(1))
+            pthread_cond_wait(&wait_empty_buffer1, &mutex); //P操作：若buffer1满了就等待其为空
+        item = 'a' + i;
+        put_item(item,1);
+        printf("produce item:%c\n",item);
+
+        pthread_cond_signal(&wait_full_buffer1);            //V操作：将buffer1的数据缓冲区数目(wait_full_buffer1) + 1
+        pthread_mutex_unlock(&mutex);                       //释放信号量
+    }
+    return NULL;
+}
+```
+(3) compute程序先作为buffer1的消费者，给buffer1加锁并取数；计算者将小写字母变成大写字母；计最后再作为buffer2的生产者，给buffer2加锁并存数。
+```
+void *compute(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i < ITEM_COUNT;i++){
+        pthread_mutex_lock(&mutex1);                        //对信号量1加锁
+        while(buffer_is_empty(1))
+            pthread_cond_wait(&wait_full_buffer1, &mutex1); //P操作：若buffer1为空则持续等待
+        item = get_item(1);
+        //printf("    compute get item:%c\n",item);
+        pthread_cond_signal(&wait_empty_buffer1);           //V操作：将buffer1的数据缓冲区数目(wait_empty_buffer1)-1
+        pthread_mutex_unlock(&mutex1);                      //释放信号量1
+
+        item -= 32;
+
+        pthread_mutex_lock(&mutex2);                        //对信号量2加锁
+        while(buffer_is_full(2))
+            pthread_cond_wait(&wait_empty_buffer2, &mutex2);//P操作：若buffer2满了则持续等待
+        put_item(item,2);
+        printf("    compute put item:%c\n", item);
+        pthread_cond_signal(&wait_full_buffer2);            //V操作：将buffer2的数据缓冲区数目(wait_full_buffer2)+1
+        pthread_mutex_unlock(&mutex2);                      //释放信号量2
+    }
+    return NULL;
+}
+```
+(4)消费者作为buffer2的消费者，给buffer2加锁并取数字。
+```
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+        pthread_mutex_lock(&mutex2);                        //对信号量2加锁
+        while(buffer_is_empty(2))
+            pthread_cond_wait(&wait_full_buffer2, &mutex2); //P操作：若buffer2为空则持续等待
+        item = get_item(2);
+        printf("            comsume item:%c\n", item);
+        pthread_cond_signal(&wait_empty_buffer2);           //V操作：将buffer2的数据缓冲区数目(wait_empty_buffer2)-1
+        pthread_mutex_unlock(&mutex2);                      //释放信号量2
+    }
+    return NULL;
+}
+```
+(5)在主函数中创建三个线程分别用于承担生产者，计算者与消费者。对线程进行初始化，并且定义两个锁用于线程间互斥，再定义四个信号量用于线程间同步，再将三个进程都调用pthread_join()函数等待线程结束，最终对互斥锁进行注销。
+
+```
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+	pthread_create(&tids[0],NULL,produce,NULL);
+    pthread_create(&tids[1],NULL,compute,NULL);
+    pthread_create(&tids[2],NULL,consume,NULL);
+
+    pthread_mutex_init(&mutex1, NULL);
+	pthread_mutex_init(&mutex2, NULL);
+    pthread_cond_init(&wait_empty_buffer1, NULL); 
+    pthread_cond_init(&wait_full_buffer1, NULL);
+    pthread_cond_init(&wait_empty_buffer2, NULL);
+    pthread_cond_init(&wait_full_buffer2, NULL);
+    
+    for(i = 0;i < 3;i++)
+        pthread_join(tids[i],NULL);
+    pthread_mutex_destroy(&mutex1);
+	pthread_mutex_destroy(&mutex2);
+
+    return 0;
+}
+```
 
 ### 3.5 pc2.c: 使用信号量解决生产者、计算者、消费者问题
 * 功能和前面的实验相同，使用信号量解决
 #### 3.5.1 pc2实验代码
+```
+
+```
 #### 3.5.2 pc2实验结果
 #### 3.5.3 pc2实验思路
 

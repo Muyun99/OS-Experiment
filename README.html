@@ -1,0 +1,1234 @@
+<!DOCTYPE html><html><head>
+      <title>README</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Muyun\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.4.2\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B9E;&#x9A8C;&#x62A5;&#x544A;</h1>
+
+<h1 class="mume-header" id="1-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E7%BC%96%E7%A8%8B%E9%A2%98%E7%9B%AE">1. &#x6587;&#x4EF6;&#x8BFB;&#x5199;&#x7F16;&#x7A0B;&#x9898;&#x76EE;</h1>
+
+<h3 class="mume-header" id="11-myechoc">1.1 myecho.c</h3>
+
+<ul>
+<li>myecho.c&#x7684;&#x529F;&#x80FD;&#x4E0E;&#x7CFB;&#x7EDF;echo&#x7A0B;&#x5E8F;&#x76F8;&#x540C;</li>
+<li>&#x63A5;&#x53D7;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x5C06;&#x53C2;&#x6570;&#x6253;&#x5370;&#x51FA;&#x6765;&#xFF0C;&#x4F8B;&#x5B50;&#x5982;&#x4E0B;&#xFF1A;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>$ ./myecho x
+x
+$ ./myecho a b c
+a b c
+</code></pre><h4 class="mume-header" id="111-myecho%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">1.1.1 myecho&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;stdio.h&gt;
+
+int main(int argc, char *argv[])
+{
+    int i = 0;
+    for(i = 1; i &lt; argc; i++)
+        printf(&quot;%s &quot;,argv[i]);
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre><h4 class="mume-header" id="112-myecho%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">1.1.2 myecho&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/25/5d1230a55ff6e.png" alt="myecho.png"></p>
+<h4 class="mume-header" id="113-myecho%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">1.1.3 myecho&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>1.&#x5B9E;&#x9A8C;&#x9884;&#x5907;&#x77E5;&#x8BC6;</p>
+<p>(1) main&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x6709;argc&#x548C;argv&#x4E24;&#x4E2A;&#x53C2;&#x6570;</p>
+<p>(2) int argc(arguments count)<br>
+argc&#x8868;&#x793A;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x4F20;&#x9001;&#x7ED9;main&#x51FD;&#x6570;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x603B;&#x4E2A;&#x6570;&#xFF0C;&#x5305;&#x62EC;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x540D;&#xFF0C;&#x5176;&#x4E2D;&#x5F53;argc=1&#x65F6;&#x8868;&#x793A;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x540D;&#x79F0;&#xFF0C;&#x6B64;&#x65F6;&#x5B58;&#x50A8;&#x5728;argv[0]&#x4E2D;</p>
+<p>(3) char *argv[](arguments value/vecotr)<br>
+argv&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#xFF0C;&#x7528;&#x6765;&#x5B58;&#x653E;&#x6307;&#x5411;&#x5B57;&#x7B26;&#x4E32;&#x53C2;&#x6570;&#x7684;&#x6307;&#x9488;&#x6570;&#x7EC4;&#xFF0C;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x53EA;&#x60F3;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x7A7A;&#x683C;&#x5206;&#x5272;&#x53C2;&#x6570;&#xFF0C;&#x5176;&#x957F;&#x5EA6;&#x4E3A;argc&#x3002;&#x6570;&#x7EC4;&#x4E0B;&#x6807;&#x4ECE;0&#x5F00;&#x59CB;&#xFF0C;argv[argc] = NULL&#x3002;</p>
+<p>2.&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;<br>
+&#x4F7F;&#x7528;main&#x51FD;&#x6570;&#x7684;argv&#x4E0E;argc&#x4F20;&#x9012;&#x53C2;&#x6570;&#xFF0C;&#x547D;&#x4EE4;&#x884C;&#x8F93;&#x5165;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x4F1A;&#x88AB;&#x5206;&#x5272;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#x3002;&#x7528;argc&#x4F5C;&#x4E3A;&#x5FAA;&#x73AF;&#x53D8;&#x91CF;&#xFF0C;&#x8F93;&#x51FA;argv&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x6CE8;&#x610F;&#x7528;&#x7A7A;&#x683C;&#x5206;&#x9694;&#x5373;&#x53EF;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF1A;argv[0]&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x662F;&#x7A0B;&#x5E8F;&#x540D;&#x79F0;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x5E94;&#x8BE5;&#x88AB;&#x8F93;&#x51FA;&#xFF0C;&#x6240;&#x4EE5;&#x4E0B;&#x6807;&#x5E94;&#x4ECE;1&#x5F00;&#x59CB;&#x3002;</p>
+<h3 class="mume-header" id="12-mycatc">1.2 mycat.c</h3>
+
+<ul>
+<li>mycat.c&#x7684;&#x529F;&#x80FD;&#x4E0E;&#x7CFB;&#x7EDF;cat&#x7A0B;&#x5E8F;&#x76F8;&#x540C;</li>
+<li>mycat&#x5C06;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x8F93;&#x51FA;&#x5230;&#x5C4F;&#x5E55;&#xFF0C;&#x4F8B;&#x5B50;&#x5982;&#x4E0B;&#xFF1A;</li>
+<li>&#x8981;&#x6C42;&#x4F7F;&#x7528;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;open/read/write/close&#x5B9E;&#x73B0;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>$ cat /etc/passwd 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+...
+$ ./mycat /etc/passwd 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+...
+</code></pre><h4 class="mume-header" id="121-mycat%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">1.2.1 mycat&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/stat.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdio.h&gt;
+
+int main(int argc, char *argv[])
+{
+	int fd;
+	char c[1];
+    if(argc == 1)
+	{
+		while(read(0,c,1))
+			write(1,c,1);
+	}
+	else
+	{
+		int i = 0;
+		for(i = 1;i &lt; argc;i++)
+		{
+		    fd = open(argv[i], O_RDONLY);
+			if(fd == -1)    //file open error&#xFF0C;output error message
+			{
+				printf(&quot;mycat: %s:No such file or directory\n&quot;, argv[i]);
+				continue;
+			}
+			while(read(fd,c,1))
+				write(1,c,1);
+			close(fd);
+		}
+    }
+    return 0;
+}
+
+</code></pre><h4 class="mume-header" id="122-mycat%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">1.2.2 mycat&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/25/5d123f0e6bd4f.png" alt="mycat.png"></p>
+<h4 class="mume-header" id="123-mycat%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">1.2.3 mycat&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>1.cat &#x547D;&#x4EE4;&#x540E;&#x53EF;&#x4E0D;&#x63A5;&#x53C2;&#x6570;</p>
+<p>&#x57FA;&#x4E8E;&#x6B64;&#x60F3;&#x6CD5;&#xFF0C;&#x5F53;&#x547D;&#x4EE4;&#x540E;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x4E3A;0(&#x5373;argc&#x4E3A;1&#x65F6;)&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x63A5;&#x6536;&#x5230;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x8FDB;&#x884C;&#x539F;&#x6837;&#x4E0D;&#x52A8;&#x7684;&#x8F93;&#x51FA;&#x3002;</p>
+<p>read(0,c,1)&#x8868;&#x793A;&#x4ECE;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x4E2D;&#x8BFB;&#x53D6;&#x5B57;&#x7B26;&#x6570;&#x7EC4;</p>
+<p>write(1,c,1)&#x8868;&#x793A;&#x5C06;&#x8BFB;&#x53D6;&#x7684;&#x5B57;&#x7B26;&#x6570;&#x7EC4;&#x5199;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x4E2D;&#x53BB;</p>
+<p>2.cat &#x547D;&#x4EE4;&#x540E;&#x53EF;&#x63A5;&#x591A;&#x4E2A;&#x53C2;&#x6570;</p>
+<p>&#x57FA;&#x4E8E;&#x6B64;&#x60F3;&#x6CD5;&#xFF0C;&#x5F53;&#x547D;&#x4EE4;&#x540E;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x4E0D;&#x4E3A;0&#x662F;(&#x5373;argc&gt;1&#x65F6;)&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;argv&#x4E2D;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x8FDB;&#x884C;&#x9010;&#x4E2A;&#x8BBF;&#x95EE;&#x5E76;&#x6253;&#x5F00;&#xFF0C;&#x6700;&#x540E;&#x8C03;&#x7528;read&#x4E0E;write&#x51FD;&#x6570;&#x5C06;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x7684;&#x5B57;&#x7B26;&#x5199;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x4E2D;&#x53BB;&#x3002;&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x5939;&#x540D;&#x5B57;&#x4E0D;&#x5408;&#x6CD5;(&#x5373;open&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E3A;-1)&#xFF0C;&#x5219;&#x5E94;&#x8F93;&#x51FA;&#x62A5;&#x9519;&#x4FE1;&#x606F;&#x3002;</p>
+<h3 class="mume-header" id="13-mycpc">1.3 mycp.c</h3>
+
+<ul>
+<li>mycp.c&#x7684;&#x529F;&#x80FD;&#x4E0E;&#x7CFB;&#x7EDF;cp&#x7A0B;&#x5E8F;&#x76F8;&#x540C;</li>
+<li>&#x5C06;&#x6E90;&#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#xFF0C;&#x4F8B;&#x5B50;&#x5982;&#x4E0B;&#xFF1A;</li>
+<li>&#x8981;&#x6C42;&#x4F7F;&#x7528;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;open/read/write/close&#x5B9E;&#x73B0;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+...
+$ ./mycp /etc/passwd passwd.bak 
+$ cat passwd.bak
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+...
+</code></pre><h4 class="mume-header" id="131-mycp%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">1.3.1 mycp&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/stat.h&gt;
+#include&lt;string.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdio.h&gt;
+
+int main(int argc, char *argv[])
+{
+    if(argc != 3)
+	{
+		printf(&quot;please check your format, the right format:cp file_src file_target\n&quot;);
+		exit(0);
+	}
+
+    char *sourcePath = argv[1];
+    char *targetPath = argv[2];
+
+    int fd1 = open(sourcePath, O_RDONLY);
+    int fd2 = open(targetPath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+
+	if(fd1 == -1)
+	{
+		printf(&quot;open %s error!&quot;,sourcePath);
+		exit(0);
+	}
+	if(fd2 == -1)
+	{
+		printf(&quot;open %s error!&quot;,targetPath);
+		exit(0);
+	}
+    char buf[1];
+    int count;
+
+    while (read(fd1, buf,1))
+    {
+        write(fd2, buf, 1);
+    }
+    close(fd1);
+    close(fd2);
+    return 0;
+}
+
+</code></pre><h4 class="mume-header" id="132-mycp%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">1.3.2 mycp&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12482f41037.png" alt="mycp.png"></p>
+<h4 class="mume-header" id="133-mycp%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">1.3.3 mycp&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>1.&#x9996;&#x5148;&#x5BF9;&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#x4E0E;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x6B63;&#x5E38;&#x6253;&#x5F00;&#x8FDB;&#x884C;&#x5224;&#x65AD;</p>
+<p>&#x5F53;&#x547D;&#x4EE4;&#x540E;&#x8DDF;&#x7684;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x5C11;&#x4E8E;3&#x4E2A;&#x65F6;&#x5019;&#xFF0C;&#x63D0;&#x9192;&#x7528;&#x6237;&#x8F93;&#x5165;&#x683C;&#x5F0F;&#x9519;&#x8BEF;&#xFF0C;&#x5E76;&#x9000;&#x51FA;&#x5F53;&#x524D;&#x7A0B;&#x5E8F;&#x3002;&#x5F53;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x9519;&#x8BEF;&#x65F6;&#xFF0C;&#x4E5F;&#x63D0;&#x9192;&#x7528;&#x6237;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x5931;&#x8D25;&#xFF0C;&#x5E76;&#x9000;&#x51FA;&#x5F53;&#x524D;&#x7A0B;&#x5E8F;&#x3002;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x70B9;&#x662F;&#xFF0C;&#x5728;&#x6253;&#x5F00;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x82E5;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&#x5E94;&#x8BE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x6587;&#x4EF6;(O_CREAT)&#xFF0C;&#x5E76;&#x4E14;&#x4E3A;&#x4E86;&#x80FD;&#x591F;&#x540E;&#x7EED;&#x64CD;&#x4F5C;&#xFF0C;&#x5C06;&#x5176;&#x6743;&#x9650;&#x8D4B;&#x4E3A;&#x9ED8;&#x8BA4;&#x6743;&#x9650;&#xFF1A;664&#x6743;&#x9650;&#x3002;</p>
+<p>2.&#x8FDB;&#x884C;&#x590D;&#x5236;</p>
+<p>&#x5F53;&#x6587;&#x4EF6;&#x90FD;&#x6B63;&#x5E38;&#x6253;&#x5F00;&#x65F6;&#xFF0C;&#x6309;&#x7167;&#x4EE5;&#x5F80;&#x7684;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x590D;&#x5236;&#x3002;&#x8C03;&#x7528;read&#x51FD;&#x6570;&#x5BF9;&#x6E90;&#x6587;&#x4EF6;&#x9010;&#x4E2A;&#x8BFB;&#x53D6;&#xFF0C;&#x5F53;&#x5176;&#x8FD4;&#x56DE;&#x7684;&#x5B57;&#x7B26;&#x4E2A;&#x6570;&#x4E3A;1&#x65F6;&#xFF0C;&#x8C03;&#x7528;write&#x51FD;&#x6570;&#x5199;&#x5165;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<h1 class="mume-header" id="2-%E5%A4%9A%E8%BF%9B%E7%A8%8B%E9%A2%98%E7%9B%AE">2. &#x591A;&#x8FDB;&#x7A0B;&#x9898;&#x76EE;</h1>
+
+<h3 class="mume-header" id="21-mysysc-%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0mysys%E7%94%A8%E4%BA%8E%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E8%A6%81%E6%B1%82%E5%A6%82%E4%B8%8B">2.1 mysys.c: &#x5B9E;&#x73B0;&#x51FD;&#x6570;mysys&#xFF0C;&#x7528;&#x4E8E;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x547D;&#x4EE4;&#xFF0C;&#x8981;&#x6C42;&#x5982;&#x4E0B;</h3>
+
+<ul>
+<li>mysys&#x7684;&#x529F;&#x80FD;&#x4E0E;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;system&#x76F8;&#x540C;&#xFF0C;&#x8981;&#x6C42;&#x7528;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x76F8;&#x5173;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0;&#x4E00;&#x904D;</li>
+<li>&#x4F7F;&#x7528;fork/exec/wait&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x5B9E;&#x73B0;mysys</li>
+<li>&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;system&#x5B9E;&#x73B0;mysys</li>
+<li>&#x6D4B;&#x8BD5;&#x7A0B;&#x5E8F;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>#include &lt;stdio.h&gt;
+
+void mysys(char *command)
+{
+    &#x5B9E;&#x73B0;&#x8BE5;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x6267;&#x884C;&#x4E00;&#x6761;&#x547D;&#x4EE4;&#xFF0C;&#x5E76;&#x7B49;&#x5F85;&#x8BE5;&#x547D;&#x4EE4;&#x6267;&#x884C;&#x7ED3;&#x675F;
+}
+
+int main()
+{
+    printf(&quot;--------------------------------------------------\n&quot;);
+    mysys(&quot;echo HELLO WORLD&quot;);
+    printf(&quot;--------------------------------------------------\n&quot;);
+    mysys(&quot;ls /&quot;);
+    printf(&quot;--------------------------------------------------\n&quot;);
+    return 0;
+}
+</code></pre><ul>
+<li>&#x6D4B;&#x8BD5;&#x7A0B;&#x5E8F;&#x7684;&#x8F93;&#x51FA;&#x7ED3;&#x679C;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>--------------------------------------------------
+HELLO WORLD
+--------------------------------------------------
+bin    core  home	     lib	 mnt   root  snap  tmp	vmlinuz
+boot   dev   initrd.img      lost+found  opt   run   srv   usr	vmlinuz.old
+cdrom  etc   initrd.img.old  media	 proc  sbin  sys   var
+--------------------------------------------------
+</code></pre><h4 class="mume-header" id="211-mysys%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">2.1.1 mysys&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;sys/wait.h&gt;
+#include&lt;sys/types.h&gt;
+
+int mysys(char *command)
+{
+	if(command[0] == &apos;\0&apos;)
+	{
+		printf(&quot;command not found!\n&quot;);
+		return 127; // &quot;command not found!&quot;
+	}
+    int pid;
+    pid = fork();
+    if(pid == 0)
+    {
+        char *argv[100];
+        char *token;
+        char cmd[sizeof(command) + 1];
+        strcpy(cmd, command);
+    
+		//get first substr
+        token = strtok(cmd, &quot; &quot;);
+        int count = 0;
+        while(token != NULL)
+        {
+            argv[count++] = token;
+            token = strtok(NULL,&quot; &quot;); 
+        }
+        argv[count] = 0;
+        execvp(argv[0],argv);
+    }
+    else
+        wait(NULL);
+}
+
+int main()
+{
+	mysys(&quot;&quot;);
+    printf(&quot;-------------------------------------------\n&quot;);
+	mysys(&quot;pwd&quot;);
+
+	printf(&quot;-------------------------------------------\n&quot;);
+	mysys(&quot;ls&quot;);
+
+    printf(&quot;-------------------------------------------\n&quot;);
+    mysys(&quot;echo HELLO WORLD&quot;);
+    
+    printf(&quot;-------------------------------------------\n&quot;);
+    mysys(&quot;ls /&quot;);
+
+    printf(&quot;-------------------------------------------\n&quot;);
+    return 0;
+}
+</code></pre><h4 class="mume-header" id="212-mysys%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">2.1.2 mysys&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12546b0072e.png" alt="mysys.png"></p>
+<h4 class="mume-header" id="213-mysys%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">2.1.3 mysys&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>1.&#x5148;&#x9A8C;&#x77E5;&#x8BC6;</p>
+<p>(1) execvp&#x51FD;&#x6570;</p>
+<p>int execvp(const char *file, char * const argv []);</p>
+<p>execvp()&#x4F1A;&#x4ECE;PATH &#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6240;&#x6307;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x53C2;&#x6570;file &#x7684;&#x6587;&#x4EF6;&#x540D;, &#x627E;&#x5230;&#x540E;&#x4FBF;&#x6267;&#x884C;&#x8BE5;&#x6587;&#x4EF6;, &#x7136;&#x540E;&#x5C06;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;argv &#x4F20;&#x7ED9;&#x8BE5;&#x6B32;&#x6267;&#x884C;&#x7684;&#x6587;&#x4EF6;</p>
+<p>(2) strtok&#x51FD;&#x6570;</p>
+<p>char *strtok(char *str, const char *delim)</p>
+<p>str -- &#x8981;&#x88AB;&#x5206;&#x89E3;&#x6210;&#x4E00;&#x7EC4;&#x5C0F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B57;&#x7B26;&#x4E32;</p>
+<p>delim -- &#x5305;&#x542B;&#x5206;&#x9694;&#x7B26;&#x7684; C &#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
+<p>&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x88AB;&#x5206;&#x89E3;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B50;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x53EF;&#x68C0;&#x7D22;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7A7A;&#x6307;&#x9488;&#x3002;</p>
+<p>(3) fork&#x51FD;&#x6570;</p>
+<p>pid_t fork(void);</p>
+<p>pid&#x662F;&#x8FDB;&#x7A0B;ID&#x7684;&#x7F29;&#x5199;&#xFF0C;pid_t&#x662F;&#x4F7F;&#x7528;typedef&#x5B9A;&#x4E49;&#x7684;&#x8FDB;&#x7A0B;ID&#x7C7B;&#x578B;</p>
+<p>&#x7236;&#x8FDB;&#x7A0B;&#x4ECE;fork&#x8FD4;&#x56DE;&#x5904;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x5728;&#x7236;&#x8FDB;&#x7A0B;&#x4E2D;&#xFF0C;fork&#x8FD4;&#x56DE;&#x5B50;&#x8FDB;&#x7A0B;PID</p>
+<p>&#x5B50;&#x8FDB;&#x7A0B;&#x4ECE;fork&#x8FD4;&#x56DE;&#x5904;&#x5F00;&#x59CB;&#x6267;&#x884C;&#xFF0C;&#x5728;&#x5B50;&#x8FDB;&#x7A0B;&#x4E2D;&#xFF0C;fork&#x8FD4;&#x56DE;0</p>
+<p>2.&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</p>
+<p>(1) &#x9996;&#x5148;&#x5224;&#x65AD;&#x547D;&#x4EE4;&#x662F;&#x5426;&#x5408;&#x6CD5;&#xFF0C;&#x7ECF;&#x8FC7;&#x5BF9;&#x4F20;&#x5165;&#x7684;&#x547D;&#x4EE4;&#x5B57;&#x7B26;&#x6570;&#x7EC4;&#x7684;&#x9996;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#xFF0C;&#x82E5;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x6253;&#x5370;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x5E76;return 127(&#x8FD4;&#x56DE;127&#x662F;&#x6307;command not found!)</p>
+<p>(2) &#x7136;&#x540E;&#x8FDB;&#x884C;fork&#x4EA7;&#x751F;&#x5B50;&#x8FDB;&#x7A0B;&#xFF0C;&#x5728;&#x5B50;&#x8FDB;&#x7A0B;&#x4E2D;&#x5B8C;&#x6210;&#x5BF9;execvp&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x5176;&#x4E2D;&#x82E5;(pid==0)&#x8868;&#x8FBE;&#x5F0F;&#x4E3A;&#x771F;&#xFF0C;&#x5373;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x4E3A;&#x5B50;&#x8FDB;&#x7A0B;&#x3002;</p>
+<p>(3) &#x5728;&#x5B50;&#x8FDB;&#x7A0B;&#x4E2D;&#x5BF9;&#x4F20;&#x5165;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x8FDB;&#x884C;&#x5206;&#x5272;&#xFF0C;&#x8FD9;&#x91CC;&#x7528;&#x5230;&#x4E86;strtok&#x51FD;&#x6570;&#x5BF9;&#x7A7A;&#x683C;&#x8FDB;&#x884C;&#x5206;&#x5272;&#xFF0C;&#x5C06;&#x5176;&#x5206;&#x5272;&#x540E;&#x7684;&#x5B50;&#x5B57;&#x7B26;&#x4E32;&#x5B58;&#x5165;argv&#x5B57;&#x7B26;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;execvp&#x51FD;&#x6570;&#xFF0C;&#x4F20;&#x5165;&#x547D;&#x4EE4;&#x53CA;argv&#x5B57;&#x7B26;&#x4E32;&#x8FDB;&#x884C;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;</p>
+<p>(4) &#x7236;&#x8FDB;&#x7A0B;&#x4E2D;&#x7B49;&#x5F85;&#x5B50;&#x8FDB;&#x7A0B;&#x5B8C;&#x6210;&#x540E;&#x9000;&#x51FA;mysys&#x51FD;&#x6570;&#x3002;</p>
+<h3 class="mume-header" id="22-sh1c">2.2 sh1.c</h3>
+
+<ul>
+<li>&#x8BE5;&#x7A0B;&#x5E8F;&#x8BFB;&#x53D6;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x8C03;&#x7528;&#x51FD;&#x6570;mysys(&#x4E0A;&#x4E00;&#x4E2A;&#x4F5C;&#x4E1A;)&#x6267;&#x884C;&#x7528;&#x6237;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x793A;&#x4F8B;&#x5982;&#x4E0B;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code># &#x7F16;&#x8BD1;sh1.c
+$ cc -o sh1 sh1.c
+
+# &#x6267;&#x884C;sh1
+$ ./sh 
+
+# sh1&#x6253;&#x5370;&#x63D0;&#x793A;&#x7B26;&gt;&#xFF0C;&#x540C;&#x65F6;&#x8BFB;&#x53D6;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x547D;&#x4EE4;echo&#xFF0C;&#x5E76;&#x6267;&#x884C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;
+&gt; echo a b c
+a b c
+
+# sh1&#x6253;&#x5370;&#x63D0;&#x793A;&#x7B26;&gt;&#xFF0C;&#x540C;&#x65F6;&#x8BFB;&#x53D6;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x547D;&#x4EE4;cat&#xFF0C;&#x5E76;&#x6267;&#x884C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;
+&gt; cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+</code></pre><ul>
+<li>&#x8BF7;&#x8003;&#x8651;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x5185;&#x7F6E;&#x547D;&#x4EE4;cd&#x3001;pwd&#x3001;exit</li>
+</ul>
+<h4 class="mume-header" id="221-sh1%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">2.2.1 sh1&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code></code></pre><h4 class="mume-header" id="222-sh1%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">2.2.2 sh1&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<h4 class="mume-header" id="223-sh1%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">2.2.3 sh1&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<h3 class="mume-header" id="23-sh2c-%E5%AE%9E%E7%8E%B0shell%E7%A8%8B%E5%BA%8F%E8%A6%81%E6%B1%82%E5%9C%A8%E7%AC%AC1%E7%89%88%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%B7%BB%E5%8A%A0%E5%A6%82%E4%B8%8B%E5%8A%9F%E8%83%BD">2.3 sh2.c: &#x5B9E;&#x73B0;shell&#x7A0B;&#x5E8F;&#xFF0C;&#x8981;&#x6C42;&#x5728;&#x7B2C;1&#x7248;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x529F;&#x80FD;</h3>
+
+<ul>
+<li>&#x5B9E;&#x73B0;&#x6587;&#x4EF6;&#x91CD;&#x5B9A;&#x5411;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code># &#x6267;&#x884C;sh2
+$ ./sh2
+
+# &#x6267;&#x884C;&#x547D;&#x4EE4;echo&#xFF0C;&#x5E76;&#x5C06;&#x8F93;&#x51FA;&#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;log&#x4E2D;
+&gt; echo hello &gt;log
+
+# &#x6253;&#x5370;cat&#x547D;&#x4EE4;&#x7684;&#x8F93;&#x51FA;&#x7ED3;&#x679C;
+&gt; cat log
+hello
+</code></pre><h4 class="mume-header" id="231-sh2%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">2.3.1 sh2&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<h4 class="mume-header" id="232-sh2%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">2.3.2 sh2&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<h3 class="mume-header" id="24-sh3c-%E5%AE%9E%E7%8E%B0shell%E7%A8%8B%E5%BA%8F%E8%A6%81%E6%B1%82%E5%9C%A8%E7%AC%AC2%E7%89%88%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%B7%BB%E5%8A%A0%E5%A6%82%E4%B8%8B%E5%8A%9F%E8%83%BD">2.4 sh3.c: &#x5B9E;&#x73B0;shell&#x7A0B;&#x5E8F;&#xFF0C;&#x8981;&#x6C42;&#x5728;&#x7B2C;2&#x7248;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x529F;&#x80FD;</h3>
+
+<ul>
+<li>&#x5B9E;&#x73B0;&#x7BA1;&#x9053;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code># &#x6267;&#x884C;sh3
+$ ./sh3
+
+# &#x6267;&#x884C;&#x547D;&#x4EE4;cat&#x548C;wc&#xFF0C;&#x4F7F;&#x7528;&#x7BA1;&#x9053;&#x8FDE;&#x63A5;cat&#x548C;wc
+&gt; cat /etc/passwd | wc -l
+</code></pre><ul>
+<li>&#x8003;&#x8651;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7BA1;&#x9053;&#x548C;&#x6587;&#x4EF6;&#x91CD;&#x5B9A;&#x5411;</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>$ cat input.txt
+3
+2
+1
+3
+2
+1
+$ cat &lt;input.txt | sort | uniq | cat &gt;output.txt
+$ cat output.txt
+1
+2
+3
+</code></pre><h4 class="mume-header" id="241-sh3%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">2.4.1 sh3&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<h4 class="mume-header" id="242-sh3%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">2.4.2 sh3&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<h4 class="mume-header" id="243-sh3%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">2.4.3 sh3&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<h1 class="mume-header" id="3-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%A2%98%E7%9B%AE">3. &#x591A;&#x7EBF;&#x7A0B;&#x9898;&#x76EE;</h1>
+
+<h3 class="mume-header" id="31-pi1c-%E4%BD%BF%E7%94%A82%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%A0%B9%E6%8D%AE%E8%8E%B1%E5%B8%83%E5%B0%BC%E5%85%B9%E7%BA%A7%E6%95%B0%E8%AE%A1%E7%AE%97pi">3.1 pi1.c: &#x4F7F;&#x7528;2&#x4E2A;&#x7EBF;&#x7A0B;&#x6839;&#x636E;&#x83B1;&#x5E03;&#x5C3C;&#x5179;&#x7EA7;&#x6570;&#x8BA1;&#x7B97;PI</h3>
+
+<ul>
+<li>&#x83B1;&#x5E03;&#x5C3C;&#x5179;&#x7EA7;&#x6570;&#x516C;&#x5F0F;: 1 - 1/3 + 1/5 - 1/7 + 1/9 - ... = PI/4</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;1&#x4E2A;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97;&#x7EA7;&#x6570;&#x7684;&#x524D;&#x534A;&#x90E8;&#x5206;</li>
+<li>&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97;&#x7EA7;&#x6570;&#x7684;&#x540E;&#x534A;&#x90E8;&#x5206;</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x7D50;&#x675F;&#x540E;,&#x5C06;&#x524D;&#x534A;&#x90E8;&#x5206;&#x548C;&#x540E;&#x534A;&#x90E8;&#x5206;&#x76F8;&#x52A0;</li>
+</ul>
+<h4 class="mume-header" id="311-pi1%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.1.1 pi1&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+
+#define NUMBER 100000
+
+double PI;
+double worker_output;
+double master_output;
+
+void *worker(void *arg){
+    int i;
+    worker_output = 0;
+    for(i = 1; i &lt;= NUMBER;i++){
+        if(i % 2 == 0)
+            worker_output -= 1/(2*(double)i - 1);
+        else
+            worker_output += 1/(2*(double)i - 1);
+    }
+}
+
+void master(){
+    int i;
+    master_output = 0;
+    for(i = NUMBER + 1;i &lt;= NUMBER*2;i++){
+        if(i % 2 == 0)
+            master_output -= 1 / (2 * (double)i - 1);
+        else
+            master_output += 1 / (2 * (double)i - 1);
+    }
+}
+
+int main()
+{
+    pthread_t worker_tid;
+    pthread_create(&amp;worker_tid, NULL, &amp;worker, NULL);
+    master();
+    pthread_join(worker_tid,NULL);
+    PI = (worker_output + master_output) * 4;
+    printf(&quot;PI:%lf\n&quot;,PI);
+    return 0;
+}
+
+</code></pre><h4 class="mume-header" id="312-pi1%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.1.2 pi1&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127298c4ae7.png" alt="pi1.png"></p>
+<h4 class="mume-header" id="313-pi1%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.1.3 pi1&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>(1)&#x4F7F;&#x7528;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97; PI&#xFF0C;&#x4E3B;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97;&#x524D;&#x534A;&#x90E8;&#x5206;&#xFF0C;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97;&#x540E;&#x534A;&#x90E8;&#x5206;&#x3002;&#x5C06;&#x6700;&#x540E;&#x7684;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x76F8;&#x52A0;&#x540E;&#x4E58;&#x4EE5; 4 &#x5F97;&#x5230; PI &#x7684;&#x4F30;&#x8BA1;&#x503C;&#x3002;&#x91C7;&#x7528; pthread_create &#x51FD;&#x6570;&#x521B;&#x5EFA;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#xFF0C;&#x4F7F;&#x7528;pthread_join &#x51FD;&#x6570;&#x7B49;&#x5F85;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#x3002;</p>
+<p>(2)worker&#x548C;master&#x51FD;&#x6570;&#x5206;&#x522B;&#x8BA1;&#x7B97;&#x7EA7;&#x6570;&#x7684;&#x540E;&#x534A;&#x6BB5;&#x548C;&#x524D;&#x534A;&#x6BB5;&#xFF0C;&#x8FED;&#x4EE3;&#x6B21;&#x6570;NUMBER&#x8D8A;&#x5927;&#xFF0C;&#x6570;&#x5B57;&#x8D8A;&#x7CBE;&#x786E;&#x3002;</p>
+<h3 class="mume-header" id="32-pi2c-%E4%BD%BF%E7%94%A8n%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%A0%B9%E6%8D%AE%E8%8E%B1%E5%B8%83%E5%B0%BC%E5%85%B9%E7%BA%A7%E6%95%B0%E8%AE%A1%E7%AE%97pi">3.2 pi2.c: &#x4F7F;&#x7528;N&#x4E2A;&#x7EBF;&#x7A0B;&#x6839;&#x636E;&#x83B1;&#x5E03;&#x5C3C;&#x5179;&#x7EA7;&#x6570;&#x8BA1;&#x7B97;PI</h3>
+
+<ul>
+<li>&#x4E0E;&#x4E0A;&#x4E00;&#x9898;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x672C;&#x9898;&#x66F4;&#x52A0;&#x901A;&#x7528;&#x5316;&#xFF0C;&#x80FD;&#x9002;&#x5E94;N&#x4E2A;&#x6838;&#x5FC3;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x7EBF;&#x7A0B;&#x53C2;&#x6570;&#x6765;&#x5B9E;&#x73B0;</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;N&#x4E2A;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;</li>
+<li>&#x6BCF;&#x4E2A;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97;&#x4E00;&#x90E8;&#x5206;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x5C06;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;N&#x4E2A;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x7ED3;&#x675F;&#xFF0C;&#x5C06;&#x6240;&#x6709;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x7684;&#x7ED3;&#x679C;&#x7D2F;&#x52A0;</li>
+</ul>
+<h4 class="mume-header" id="321-pi2%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.2.1 pi2&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+
+#define NUMBER 100000
+#define N 100
+
+double PI;
+struct param{
+    int start;
+    int end;
+};
+
+struct result{
+    double worker_output;
+};
+
+void *worker(void *arg){
+    int i;
+    struct param *param;
+    struct result *result;
+    double worker_output = 0;
+    param = (struct param *) arg;
+
+    for(i = param-&gt;start; i &lt;= param-&gt;end;i++){
+        if(i % 2 == 0)
+            worker_output -= 1/(2*(double)i - 1);
+        else
+            worker_output += 1/(2*(double)i - 1);
+    }
+    result = malloc(sizeof(struct result));
+    result-&gt;worker_output = worker_output;
+	printf(&quot;worker %d = %.10lf\n&quot;,param-&gt;start / NUMBER, worker_output);
+    return result;
+}
+
+
+int main()
+{
+    int i;
+    pthread_t worker_tids[N];
+    struct param params[N];
+    PI = 0.0;
+
+    for(i = 0; i &lt; N;i++){
+        struct param *param;
+        param = &amp;params[i];
+        param-&gt;start =i * NUMBER + 1;
+        param-&gt;end = (i+1) * NUMBER;
+        pthread_create(&amp;worker_tids[i], NULL, worker, param);
+    }
+    
+    for(i = 0;i &lt; N;i++){
+        struct result *result;
+        pthread_join(worker_tids[i],(void **)&amp;result);
+        PI += result-&gt;worker_output;
+        free(result);
+    }
+    PI = PI * 4;
+    printf(&quot;PI:%.10lf\n&quot;,PI);
+    return 0;
+}
+</code></pre><h4 class="mume-header" id="322-pi2%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.2.2 pi2&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127466c0a48.png" alt="pi2-2.png"><br>
+<img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d127466c4c6d.png" alt="pi2-1.png"></p>
+<h4 class="mume-header" id="323-pi2%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.2.3 pi2&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>(1) &#x4E3B;&#x7EBF;&#x7A0B;&#x91C7;&#x7528; for &#x5FAA;&#x73AF;&#x4EA7;&#x751F; 100 &#x4E2A;&#x7EBF;&#x7A0B;&#x6765;&#x8BA1;&#x7B97; PI&#x3002;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BA1;&#x7B97; 1/100 &#x7684;&#x90E8;&#x5206;&#xFF0C;&#x8BA1;&#x7B97;&#x8D77;&#x6B62;&#x70B9;&#x4F5C;&#x4E3A;pthread_create&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;param&#x4F20;&#x5165;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x7684;&#x7EBF;&#x7A0B;&#x5165;&#x53E3;&#x51FD;&#x6570;&#x3002;&#x5728;Worker&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x901A;&#x8FC7;param = (struct param *) arg&#x6765;&#x63A5;&#x6536;&#x4F20;&#x8FC7;&#x6765;&#x7684;param&#x7ED3;&#x6784;&#x4F53;&#x3002;</p>
+<p>(2) &#x4E3B;&#x7EBF;&#x7A0B;&#x91C7;&#x7528; for &#x5FAA;&#x73AF;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x7684;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x5229;&#x7528; pthread_join &#x51FD;&#x6570;&#x63A5;&#x53D7;&#x7EBF;&#x7A0B;&#x5165;&#x53E3;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;result,&#x7136;&#x540E;&#x83B7;&#x5F97;&#x6BCF;&#x4E00;&#x4E2A;worker&#x7684;worker_output&#x5728;&#x8FDB;&#x884C;&#x76F8;&#x52A0;&#x5F97;&#x5230;PI&#x7684;&#x503C;&#x3002;</p>
+<h3 class="mume-header" id="33-sortc-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8E%92%E5%BA%8F">3.3 sort.c: &#x591A;&#x7EBF;&#x7A0B;&#x6392;&#x5E8F;</h3>
+
+<ul>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x4F7F;&#x7528;&#x9009;&#x62E9;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x5BF9;&#x6570;&#x7EC4;&#x7684;&#x524D;&#x534A;&#x90E8;&#x5206;&#x6392;&#x5E8F;</li>
+<li>&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x4F7F;&#x7528;&#x9009;&#x62E9;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x5BF9;&#x6570;&#x7EC4;&#x7684;&#x540E;&#x534A;&#x90E8;&#x5206;&#x6392;&#x5E8F;</li>
+<li>&#x4E3B;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x8F85;&#x52A9;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x7D50;&#x675F;&#x540E;,&#x4F7F;&#x7528;&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x5F52;&#x5E76;&#x6570;&#x7EC4;&#x7684;&#x524D;&#x534A;&#x90E8;&#x5206;&#x548C;&#x540E;&#x534A;&#x90E8;&#x5206;</li>
+</ul>
+<h4 class="mume-header" id="331-sort%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.3.1 sort&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<h4 class="mume-header" id="332-sort%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.3.2 sort&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<h4 class="mume-header" id="333-sort%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.3.3 sort&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<h3 class="mume-header" id="34-pc1c-%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E8%A7%A3%E5%86%B3%E7%94%9F%E4%BA%A7%E8%80%85-%E8%AE%A1%E7%AE%97%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98">3.4 pc1.c: &#x4F7F;&#x7528;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x89E3;&#x51B3;&#x751F;&#x4EA7;&#x8005;&#x3001;&#x8BA1;&#x7B97;&#x8005;&#x3001;&#x6D88;&#x8D39;&#x8005;&#x95EE;&#x9898;</h3>
+
+<ul>
+<li>&#x7CFB;&#x7EDF;&#x4E2D;&#x6709;3&#x4E2A;&#x7EBF;&#x7A0B;&#xFF1A;&#x751F;&#x4EA7;&#x8005;&#x3001;&#x8BA1;&#x7B97;&#x8005;&#x3001;&#x6D88;&#x8D39;&#x8005;</li>
+<li>&#x7CFB;&#x7EDF;&#x4E2D;&#x6709;2&#x4E2A;&#x5BB9;&#x91CF;&#x4E3A;4&#x7684;&#x7F13;&#x51B2;&#x533A;&#xFF1A;buffer1&#x3001;buffer2</li>
+<li>&#x751F;&#x4EA7;&#x8005;&#x751F;&#x4EA7;&apos;a&apos;&#x3001;&apos;b&apos;&#x3001;&apos;c&apos;&#x3001;&#x2018;d&apos;&#x3001;&apos;e&apos;&#x3001;&apos;f&apos;&#x3001;&apos;g&apos;&#x3001;&apos;h&apos;&#x516B;*&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x653E;&#x5165;&#x5230;buffer1</li>
+<li>&#x8BA1;&#x7B97;&#x8005;&#x4ECE;buffer1&#x53D6;&#x51FA;&#x5B57;&#x7B26;&#xFF0C;&#x5C06;&#x5C0F;&#x5199;&#x5B57;&#x7B26;&#x8F6C;&#x6362;&#x4E3A;&#x5927;&#x5199;&#x5B57;&#x7B26;&#xFF0C;&#x653E;&#x5165;&#x5230;buffer2</li>
+<li>&#x6D88;&#x8D39;&#x8005;&#x4ECE;buffer2&#x53D6;&#x51FA;&#x5B57;&#x7B26;&#xFF0C;&#x5C06;&#x5176;&#x6253;&#x5370;&#x5230;&#x5C4F;&#x5E55;&#x4E0A;</li>
+</ul>
+<h4 class="mume-header" id="341-pc1%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.4.1 pc1&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+#define CAPACITY 4
+
+char buffer1[CAPACITY];
+char buffer2[CAPACITY];
+int in1,out1;
+int in2,out2;
+
+int buffer_is_empty(int index){
+    if(index == 1)
+        return in1 == out1;
+    if(index == 2)
+        return in2 == out2;
+    else
+        printf(&quot;Don`t exist this buffer!,Empty&quot;);
+}
+
+int buffer_is_full(int index){
+    if(index == 1)
+        return (in1 + 1) % CAPACITY == out1;
+    if(index == 2)
+        return (in2 + 1) % CAPACITY == out2;
+    else
+        printf(&quot;Don`t exist this buffer!,Full&quot;);
+}   
+char get_item(int index){
+    char item;
+    if(index == 1){
+        item = buffer1[out1];
+        out1 = (out1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        item = buffer2[out2];
+        out2 = (out2 + 1) % CAPACITY;
+    }
+    //else
+    //  printf(&quot;Don`t exist this buffer!,Get%d\n&quot;,index);
+    return item;
+}
+
+void put_item(char item, int index){
+    if(index == 1){
+        buffer1[in1] = item;
+        in1 = (in1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        buffer2[in2] = item;
+        in2 = (in2 + 1) % CAPACITY;
+    }
+    //else
+    //    printf(&quot;Don`t exist this buffer!Put%c  %d\n&quot;,item,index);
+}
+
+pthread_mutex_t mutex1,mutex2;
+pthread_cond_t wait_empty_buffer1;
+pthread_cond_t wait_full_buffer1;
+pthread_cond_t wait_empty_buffer2;
+pthread_cond_t wait_full_buffer2;
+
+
+volatile int global = 0;
+
+#define ITEM_COUNT 8
+
+void *produce(void *arg){
+    int i;
+    char item;
+    
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex1);
+        while(buffer_is_full(1))
+            pthread_cond_wait(&amp;wait_empty_buffer1, &amp;mutex1);
+        item = &apos;a&apos; + i;
+        put_item(item,1);
+        printf(&quot;produce item:%c\n&quot;,item);
+
+        pthread_cond_signal(&amp;wait_full_buffer1);
+        pthread_mutex_unlock(&amp;mutex1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex1);
+        while(buffer_is_empty(1))
+            pthread_cond_wait(&amp;wait_full_buffer1, &amp;mutex1);
+        item = get_item(1);
+        //printf(&quot;    compute get item:%c\n&quot;,item);
+        pthread_cond_signal(&amp;wait_empty_buffer1);
+        pthread_mutex_unlock(&amp;mutex1);
+
+        item -= 32;
+
+		pthread_mutex_lock(&amp;mutex2);
+        while(buffer_is_full(2))
+            pthread_cond_wait(&amp;wait_empty_buffer2, &amp;mutex2);
+        put_item(item,2);
+        printf(&quot;    compute put item:%c\n&quot;, item);
+        pthread_cond_signal(&amp;wait_full_buffer2);
+        pthread_mutex_unlock(&amp;mutex2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex2);
+        while(buffer_is_empty(2))
+            pthread_cond_wait(&amp;wait_full_buffer2, &amp;mutex2);
+        item = get_item(2);
+        printf(&quot;            comsume item:%c\n&quot;, item);
+
+        pthread_cond_signal(&amp;wait_empty_buffer2);
+        pthread_mutex_unlock(&amp;mutex2);
+    }
+    return NULL;
+}
+
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+	pthread_create(&amp;tids[0],NULL,produce,NULL);
+    pthread_create(&amp;tids[1],NULL,compute,NULL);
+    pthread_create(&amp;tids[2],NULL,consume,NULL);
+
+    pthread_mutex_init(&amp;mutex1, NULL);
+	pthread_mutex_init(&amp;mutex2, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer1, NULL); 
+    pthread_cond_init(&amp;wait_full_buffer1, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer2, NULL);
+    pthread_cond_init(&amp;wait_full_buffer2, NULL);
+    
+    for(i = 0;i &lt; 3;i++)
+        pthread_join(tids[i],NULL);
+    pthread_mutex_destroy(&amp;mutex1);
+	pthread_mutex_destroy(&amp;mutex2);
+    
+
+    return 0;
+}
+</code></pre><h4 class="mume-header" id="342-pc2%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.4.2 pc2&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12dae722aa3.png" alt="pc1.png"></p>
+<h4 class="mume-header" id="343-pc2%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.4.3 pc2&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<p>1.&#x5148;&#x9A8C;&#x77E5;&#x8BC6;</p>
+<p>(1) pthread_mutex_t &#x4E0E; pthread_cond_t</p>
+<table>
+<thead>
+<tr>
+<th>&#x7C7B;&#x578B;&#x540D;</th>
+<th>&#x7C7B;&#x578B;&#x529F;&#x80FD;</th>
+<th>&#x58F0;&#x660E;&#x539F;&#x578B;</th>
+<th>&#x58F0;&#x660E;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pthread_mutex_t</td>
+<td>&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x4E92;&#x65A5;&#x9501;(&#x7528;&#x4E8E;&#x7EBF;&#x7A0B;&#x4E92;&#x65A5;)</td>
+<td>typedef void *pthread_mutex_t</td>
+<td>pthread_mutex_t mutex1,mutex2;</td>
+</tr>
+<tr>
+<td>pthread_cond_t</td>
+<td>&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x6761;&#x4EF6;&#x53D8;&#x91CF;(&#x7528;&#x4E8E;&#x7EBF;&#x7A0B;&#x540C;&#x6B65;)</td>
+<td>typedef void *pthread_mutex_t</td>
+<td>pthread_cond_t wait_empty_buffer1;</td>
+</tr>
+</tbody>
+</table>
+<p>(2) pthread_mutex_lock() &#x548C; pthread_mutex_unlock()</p>
+<table>
+<thead>
+<tr>
+<th>&#x51FD;&#x6570;&#x540D;</th>
+<th>&#x51FD;&#x6570;&#x529F;&#x80FD;</th>
+<th>&#x51FD;&#x6570;&#x539F;&#x578B;</th>
+<th>&#x51FD;&#x6570;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pthread_mutex_lock()</td>
+<td>&#x5BF9;&#x4E92;&#x65A5;&#x9501;&#x52A0;&#x9501;</td>
+<td>int pthread_mutex_lock(pthread_mutex_t *m)</td>
+<td>pthread_mutex_lock(&amp;mutex1);</td>
+</tr>
+<tr>
+<td>pthread_mutex_unlock()</td>
+<td>&#x5BF9;&#x4E92;&#x65A5;&#x9501;&#x89E3;&#x9501;</td>
+<td>int pthread_mutex_unlock(pthread_mutex_t *m)</td>
+<td>pthread_mutex_unlock(&amp;mutex1);</td>
+</tr>
+</tbody>
+</table>
+<p>(3) pthread_cond_wait() &#x548C; pthread_cond_signal()</p>
+<table>
+<thead>
+<tr>
+<th>&#x51FD;&#x6570;&#x540D;</th>
+<th>&#x51FD;&#x6570;&#x529F;&#x80FD;</th>
+<th>&#x51FD;&#x6570;&#x539F;&#x578B;</th>
+<th>&#x51FD;&#x6570;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pthread_cond_wait()</td>
+<td>&#x65E0;&#x6761;&#x4EF6;&#x7B49;&#x5F85;</td>
+<td>int pthread_cond_wait(pthread_cond_t *cv, pthread_mutex_t *external_mutex)</td>
+<td>pthread_cond_wait(&amp;wait_empty_buffer1, &amp;mutex1);</td>
+</tr>
+<tr>
+<td>pthread_cond_signal()</td>
+<td>&#x6FC0;&#x6D3B;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;</td>
+<td>int pthread_cond_wait(pthread_cond_t *cv, pthread_mutex_t *external_mutex)</td>
+<td>pthread_cond_signal(&amp;wait_full_buffer1);</td>
+</tr>
+</tbody>
+</table>
+<p>(4) pthread_mutex_init()&#x3001;pthread_mutex_destroy() &#x548C; pthread_cond_init()</p>
+<table>
+<thead>
+<tr>
+<th>&#x51FD;&#x6570;&#x540D;</th>
+<th>&#x51FD;&#x6570;&#x529F;&#x80FD;</th>
+<th>&#x51FD;&#x6570;&#x539F;&#x578B;</th>
+<th>&#x51FD;&#x6570;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pthread_mutex_init()</td>
+<td>&#x4E92;&#x65A5;&#x9501;&#x7684;&#x521D;&#x59CB;&#x5316;</td>
+<td>int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t * attr)</td>
+<td>pthread_mutex_init(&amp;mutex1, NULL);</td>
+</tr>
+<tr>
+<td>pthread_mutex_destory()</td>
+<td>&#x4E92;&#x65A5;&#x9501;&#x7684;&#x91CA;&#x653E;</td>
+<td>int pthread_mutex_destroy(pthread_mutex_t *m)</td>
+<td>pthread_mutex_destroy(&amp;mutex1);</td>
+</tr>
+<tr>
+<td>pthread_cond_init()</td>
+<td>&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x5316;</td>
+<td>int pthread_cond_init(pthread_cond_t *cv, const pthread_condattr_t *a)</td>
+<td>thread_cond_init(&amp;wait_empty_buffer1, NULL);</td>
+</tr>
+</tbody>
+</table>
+<p>(5) pthread_create() &#x548C; pthread_join()</p>
+<table>
+<thead>
+<tr>
+<th>&#x51FD;&#x6570;&#x540D;</th>
+<th>&#x51FD;&#x6570;&#x529F;&#x80FD;</th>
+<th>&#x51FD;&#x6570;&#x539F;&#x578B;</th>
+<th>&#x51FD;&#x6570;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pthread_create()</td>
+<td>&#x7EBF;&#x7A0B;&#x7684;&#x521B;&#x5EFA;</td>
+<td>int pthread_create(pthread_t *th, const pthread_attr_t *attr, void *(*func)(void *), void *arg)</td>
+<td>pthread_create(&amp;tids,NULL,produce,NULL);</td>
+</tr>
+<tr>
+<td>pthread_join()</td>
+<td>&#x7528;&#x4E8E;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x7ED3;&#x675F;,&#x7EBF;&#x7A0B;&#x95F4;&#x540C;&#x6B65;&#x7684;&#x64CD;&#x4F5C;</td>
+<td>int pthread_join(pthread_t t, void **res)</td>
+<td>pthread_join(tids,NULL);</td>
+</tr>
+</tbody>
+</table>
+<p>2.&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</p>
+<p>(1) &#x5B9A;&#x4E49;&#x4E24;&#x4E2A;&#x5BB9;&#x91CF;&#x4E3A;4&#x7684;buffer&#xFF1A;buffer1&#x4E0E;buffer2&#x3002;&#x8BA1;&#x7B97;&#x8005;&#x4ECE;buffer1&#x53D6;&#x51FA;&#x5B57;&#x7B26;&#xFF0C;&#x5C06;&#x5C0F;&#x5199;&#x5B57;&#x7B26;&#x8F6C;&#x6362;&#x4E3A;&#x5927;&#x5199;&#x5B57;&#x7B26;&#xFF0C;&#x653E;&#x5165;&#x5230;buffer2&#x3002;&#x6D88;&#x8D39;&#x8005;&#x4ECE;buffer2&#x53D6;&#x51FA;&#x5B57;&#x7B26;&#xFF0C;&#x5C06;&#x5176;&#x6253;&#x5370;&#x5230;&#x5C4F;&#x5E55;&#x4E0A;&#x3002;&#x5B9A;&#x4E49;&#x4E92;&#x65A5;&#x4FE1;&#x53F7;&#x91CF;&#x7528;&#x4E8E;&#x8FDB;&#x7A0B;&#x95F4;&#x4E92;&#x65A5;&#xFF0C;&#x5B9A;&#x4E49;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7528;&#x4E8E;&#x8FDB;&#x7A0B;&#x95F4;&#x540C;&#x6B65;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>#define CAPACITY 4                  //&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;
+#define ITEM_COUNT 8                //&#x5B57;&#x7B26;&#x7684;&#x6570;&#x91CF;
+char buffer1[CAPACITY]; 
+char buffer2[CAPACITY];
+int in1,out1;                       //&#x5B9A;&#x4E49;&#x5F53;&#x524D;buffer1&#x7684;&#x8BFB;&#x6307;&#x9488;&#x548C;&#x5199;&#x6307;&#x9488;
+int in2,out2;                       //&#x5B9A;&#x4E49;&#x5F53;&#x524D;buffer2&#x7684;&#x8BFB;&#x6307;&#x9488;&#x548C;&#x5199;&#x6307;&#x9488;
+pthread_mutex_t mutex1,mutex2;      //&#x5B9A;&#x4E49;&#x4E92;&#x65A5;&#x4FE1;&#x53F7;&#x91CF;
+pthread_cond_t wait_empty_buffer1; 
+pthread_cond_t wait_full_buffer1;   //&#x5B9A;&#x4E49;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7528;&#x4E8E;produce&#x4E0E;compute&#x4E4B;&#x95F4;&#x7684;&#x540C;&#x6B65;
+pthread_cond_t wait_empty_buffer2;
+pthread_cond_t wait_full_buffer2;   //&#x5B9A;&#x4E49;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x7528;&#x4E8E;compute&#x4E0E;consume&#x4E4B;&#x95F4;&#x7684;&#x540C;&#x6B65;
+</code></pre><p>(2) produce&#x7A0B;&#x5E8F;&#x4F5C;&#x4E3A;buffer1&#x7684;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x5728;&#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#x7ED9;buffer1&#x52A0;&#x9501;&#x5E76;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x5165;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>void *produce(void *arg){
+    int i;
+    char item;
+    
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex);                         //&#x5BF9;&#x4E92;&#x65A5;&#x9501;&#x8FDB;&#x884C;&#x52A0;&#x9501;
+        while(buffer_is_full(1))
+            pthread_cond_wait(&amp;wait_empty_buffer1, &amp;mutex); //P&#x64CD;&#x4F5C;&#xFF1A;&#x82E5;buffer1&#x6EE1;&#x4E86;&#x5C31;&#x7B49;&#x5F85;&#x5176;&#x4E3A;&#x7A7A;
+        item = &apos;a&apos; + i;
+        put_item(item,1);
+        printf(&quot;produce item:%c\n&quot;,item);
+
+        pthread_cond_signal(&amp;wait_full_buffer1);            //V&#x64CD;&#x4F5C;&#xFF1A;&#x5C06;buffer1&#x7684;&#x6570;&#x636E;&#x7F13;&#x51B2;&#x533A;&#x6570;&#x76EE;(wait_full_buffer1) + 1
+        pthread_mutex_unlock(&amp;mutex);                       //&#x91CA;&#x653E;&#x4FE1;&#x53F7;&#x91CF;
+    }
+    return NULL;
+}
+</code></pre><p>(3) compute&#x7A0B;&#x5E8F;&#x5148;&#x4F5C;&#x4E3A;buffer1&#x7684;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x7ED9;buffer1&#x52A0;&#x9501;&#x5E76;&#x53D6;&#x6570;&#xFF1B;&#x8BA1;&#x7B97;&#x8005;&#x5C06;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x53D8;&#x6210;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#xFF1B;&#x8BA1;&#x6700;&#x540E;&#x518D;&#x4F5C;&#x4E3A;buffer2&#x7684;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x7ED9;buffer2&#x52A0;&#x9501;&#x5E76;&#x5B58;&#x6570;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>void *compute(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex1);                        //&#x5BF9;&#x4FE1;&#x53F7;&#x91CF;1&#x52A0;&#x9501;
+        while(buffer_is_empty(1))
+            pthread_cond_wait(&amp;wait_full_buffer1, &amp;mutex1); //P&#x64CD;&#x4F5C;&#xFF1A;&#x82E5;buffer1&#x4E3A;&#x7A7A;&#x5219;&#x6301;&#x7EED;&#x7B49;&#x5F85;
+        item = get_item(1);
+        //printf(&quot;    compute get item:%c\n&quot;,item);
+        pthread_cond_signal(&amp;wait_empty_buffer1);           //V&#x64CD;&#x4F5C;&#xFF1A;&#x5C06;buffer1&#x7684;&#x6570;&#x636E;&#x7F13;&#x51B2;&#x533A;&#x6570;&#x76EE;(wait_empty_buffer1)-1
+        pthread_mutex_unlock(&amp;mutex1);                      //&#x91CA;&#x653E;&#x4FE1;&#x53F7;&#x91CF;1
+
+        item -= 32;
+
+        pthread_mutex_lock(&amp;mutex2);                        //&#x5BF9;&#x4FE1;&#x53F7;&#x91CF;2&#x52A0;&#x9501;
+        while(buffer_is_full(2))
+            pthread_cond_wait(&amp;wait_empty_buffer2, &amp;mutex2);//P&#x64CD;&#x4F5C;&#xFF1A;&#x82E5;buffer2&#x6EE1;&#x4E86;&#x5219;&#x6301;&#x7EED;&#x7B49;&#x5F85;
+        put_item(item,2);
+        printf(&quot;    compute put item:%c\n&quot;, item);
+        pthread_cond_signal(&amp;wait_full_buffer2);            //V&#x64CD;&#x4F5C;&#xFF1A;&#x5C06;buffer2&#x7684;&#x6570;&#x636E;&#x7F13;&#x51B2;&#x533A;&#x6570;&#x76EE;(wait_full_buffer2)+1
+        pthread_mutex_unlock(&amp;mutex2);                      //&#x91CA;&#x653E;&#x4FE1;&#x53F7;&#x91CF;2
+    }
+    return NULL;
+}
+</code></pre><p>(4)&#x6D88;&#x8D39;&#x8005;&#x4F5C;&#x4E3A;buffer2&#x7684;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x7ED9;buffer2&#x52A0;&#x9501;&#x5E76;&#x53D6;&#x6570;&#x5B57;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex2);                        //&#x5BF9;&#x4FE1;&#x53F7;&#x91CF;2&#x52A0;&#x9501;
+        while(buffer_is_empty(2))
+            pthread_cond_wait(&amp;wait_full_buffer2, &amp;mutex2); //P&#x64CD;&#x4F5C;&#xFF1A;&#x82E5;buffer2&#x4E3A;&#x7A7A;&#x5219;&#x6301;&#x7EED;&#x7B49;&#x5F85;
+        item = get_item(2);
+        printf(&quot;            comsume item:%c\n&quot;, item);
+        pthread_cond_signal(&amp;wait_empty_buffer2);           //V&#x64CD;&#x4F5C;&#xFF1A;&#x5C06;buffer2&#x7684;&#x6570;&#x636E;&#x7F13;&#x51B2;&#x533A;&#x6570;&#x76EE;(wait_empty_buffer2)-1
+        pthread_mutex_unlock(&amp;mutex2);                      //&#x91CA;&#x653E;&#x4FE1;&#x53F7;&#x91CF;2
+    }
+    return NULL;
+}
+</code></pre><p>(5)&#x5728;&#x4E3B;&#x51FD;&#x6570;&#x4E2D;&#x521B;&#x5EFA;&#x4E09;&#x4E2A;&#x7EBF;&#x7A0B;&#x5206;&#x522B;&#x7528;&#x4E8E;&#x627F;&#x62C5;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x8BA1;&#x7B97;&#x8005;&#x4E0E;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x5BF9;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5E76;&#x4E14;&#x5B9A;&#x4E49;&#x4E24;&#x4E2A;&#x9501;&#x7528;&#x4E8E;&#x7EBF;&#x7A0B;&#x95F4;&#x4E92;&#x65A5;&#xFF0C;&#x518D;&#x5B9A;&#x4E49;&#x56DB;&#x4E2A;&#x4FE1;&#x53F7;&#x91CF;&#x7528;&#x4E8E;&#x7EBF;&#x7A0B;&#x95F4;&#x540C;&#x6B65;&#xFF0C;&#x518D;&#x5C06;&#x4E09;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x8C03;&#x7528;pthread_join()&#x51FD;&#x6570;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#xFF0C;&#x6700;&#x7EC8;&#x5BF9;&#x4E92;&#x65A5;&#x9501;&#x8FDB;&#x884C;&#x6CE8;&#x9500;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+	pthread_create(&amp;tids[0],NULL,produce,NULL);
+    pthread_create(&amp;tids[1],NULL,compute,NULL);
+    pthread_create(&amp;tids[2],NULL,consume,NULL);
+
+    pthread_mutex_init(&amp;mutex1, NULL);
+	pthread_mutex_init(&amp;mutex2, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer1, NULL); 
+    pthread_cond_init(&amp;wait_full_buffer1, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer2, NULL);
+    pthread_cond_init(&amp;wait_full_buffer2, NULL);
+    
+    for(i = 0;i &lt; 3;i++)
+        pthread_join(tids[i],NULL);
+    pthread_mutex_destroy(&amp;mutex1);
+	pthread_mutex_destroy(&amp;mutex2);
+
+    return 0;
+}
+</code></pre><h3 class="mume-header" id="35-pc2c-%E4%BD%BF%E7%94%A8%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%A7%A3%E5%86%B3%E7%94%9F%E4%BA%A7%E8%80%85-%E8%AE%A1%E7%AE%97%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98">3.5 pc2.c: &#x4F7F;&#x7528;&#x4FE1;&#x53F7;&#x91CF;&#x89E3;&#x51B3;&#x751F;&#x4EA7;&#x8005;&#x3001;&#x8BA1;&#x7B97;&#x8005;&#x3001;&#x6D88;&#x8D39;&#x8005;&#x95EE;&#x9898;</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#x548C;&#x524D;&#x9762;&#x7684;&#x5B9E;&#x9A8C;&#x76F8;&#x540C;&#xFF0C;&#x4F7F;&#x7528;&#x4FE1;&#x53F7;&#x91CF;&#x89E3;&#x51B3;</li>
+</ul>
+<h4 class="mume-header" id="351-pc2%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.5.1 pc2&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<h4 class="mume-header" id="352-pc2%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.5.2 pc2&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<h4 class="mume-header" id="353-pc2%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.5.3 pc2&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+<h3 class="mume-header" id="36-ringc-%E5%88%9B%E5%BB%BAn%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%AE%83%E4%BB%AC%E6%9E%84%E6%88%90%E4%B8%80%E4%B8%AA%E7%8E%AF">3.6 ring.c: &#x521B;&#x5EFA;N&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x5B83;&#x4EEC;&#x6784;&#x6210;&#x4E00;&#x4E2A;&#x73AF;</h3>
+
+<ul>
+<li>&#x521B;&#x5EFA;N&#x4E2A;&#x7EBF;&#x7A0B;&#xFF1A;T1&#x3001;T2&#x3001;T3&#x3001;&#x2026; TN</li>
+<li>T1&#x5411;T2&#x53D1;&#x9001;&#x6574;&#x6570;1</li>
+<li>T2&#x6536;&#x5230;&#x540E;&#x5C06;&#x6574;&#x6570;&#x52A0;1</li>
+<li>T2&#x5411;T3&#x53D1;&#x9001;&#x6574;&#x6570;2</li>
+<li>T3&#x6536;&#x5230;&#x540E;&#x5C06;&#x6574;&#x6570;&#x52A0;1</li>
+<li>T3&#x5411;T4&#x53D1;&#x9001;&#x6574;&#x6570;3</li>
+<li>&#x2026;</li>
+<li>TN&#x6536;&#x5230;&#x540E;&#x5C06;&#x6574;&#x6570;&#x52A0;1</li>
+<li>TN&#x5411;T1&#x53D1;&#x9001;&#x6574;&#x6570;N</li>
+</ul>
+<h4 class="mume-header" id="361-ring%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.6.1 ring&#x5B9E;&#x9A8C;&#x4EE3;&#x7801;</h4>
+
+<h4 class="mume-header" id="362-ring%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.6.2 ring&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;</h4>
+
+<h4 class="mume-header" id="363-ring%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.6.3 ring&#x5B9E;&#x9A8C;&#x601D;&#x8DEF;</h4>
+
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
