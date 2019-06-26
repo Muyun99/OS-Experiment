@@ -863,10 +863,329 @@ int main(){
 * 功能和前面的实验相同，使用信号量解决
 #### 3.5.1 pc2实验代码
 ```
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<pthread.h>
+#define CAPACITY 4
 
+char buffer1[CAPACITY];
+char buffer2[CAPACITY];
+int in1,out1;
+int in2,out2;
+
+int buffer_is_empty(int index){
+    if(index == 1)
+        return in1 == out1;
+    if(index == 2)
+        return in2 == out2;
+    else
+        printf("Don`t exist this buffer!,Empty");
+}
+
+int buffer_is_full(int index){
+    if(index == 1)
+        return (in1 + 1) % CAPACITY == out1;
+    if(index == 2)
+        return (in2 + 1) % CAPACITY == out2;
+    else
+        printf("Don`t exist this buffer!,Full");
+}   
+char get_item(int index){
+    char item;
+    if(index == 1){
+        item = buffer1[out1];
+        out1 = (out1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        item = buffer2[out2];
+        out2 = (out2 + 1) % CAPACITY;
+    }
+    //else
+    //  printf("Don`t exist this buffer!,Get%d\n",index);
+    return item;
+}
+
+void put_item(char item, int index){
+    if(index == 1){
+        buffer1[in1] = item;
+        in1 = (in1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        buffer2[in2] = item;
+        in2 = (in2 + 1) % CAPACITY;
+    }
+    //else
+    //    printf("Don`t exist this buffer!Put%c  %d\n",item,index);
+}
+
+typedef struct{
+    int value;
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+}sema_t;
+
+void sema_init(sema_t *sema, int value){
+    sema->value = value;
+    pthread_mutex_init(&sema->mutex, NULL);
+    pthread_cond_init(&sema->cond, NULL);
+}
+
+void sema_wait(sema_t *sema){
+    pthread_mutex_lock(&sema->mutex);
+    while(sema->value <= 0)
+        pthread_cond_wait(&sema->cond, &sema->mutex);
+    sema->value--;
+    pthread_mutex_unlock(&sema->mutex);
+}
+
+void sema_signal(sema_t *sema){
+    pthread_mutex_lock(&sema->mutex);
+    ++sema->value;
+    pthread_cond_signal(&sema->cond);
+    pthread_mutex_unlock(&sema->mutex);
+}
+
+sema_t mutex_sema1,mutex_sema2;
+sema_t empty_buffer_sema1;
+sema_t full_buffer_sema1;
+sema_t empty_buffer_sema2;
+sema_t full_buffer_sema2;
+
+volatile int global = 0;
+
+#define ITEM_COUNT 8
+
+void *produce(void *arg){
+    int i;
+    char item;
+    
+    for(i = 0;i < ITEM_COUNT;i++){
+        sema_wait(&empty_buffer_sema1);
+        sema_wait(&mutex_sema1);
+        
+        item = 'a' + i;
+        put_item(item,1);
+        printf("produce item:%c\n",item);
+        
+        sema_signal(&mutex_sema1);
+        sema_signal(&full_buffer_sema1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+        sema_wait(&full_buffer_sema1);
+        sema_wait(&mutex_sema1);
+        
+        item = get_item(1);
+        // printf("    compute get item:%c\n",item);
+       
+        sema_signal(&mutex_sema1);
+        sema_signal(&empty_buffer_sema1);
+
+        item -= 32;
+
+        sema_wait(&empty_buffer_sema2);
+        sema_wait(&mutex_sema2);
+        
+        put_item(item,2);
+        printf("    compute put item:%c\n", item);
+        
+        sema_signal(&mutex_sema2);
+        sema_signal(&full_buffer_sema2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+       
+        sema_wait(&full_buffer_sema2);
+        sema_wait(&mutex_sema2);
+       
+        item = get_item(2);
+        printf("            comsume item:%c\n", item);
+        
+        sema_signal(&mutex_sema2);
+        sema_signal(&empty_buffer_sema2);
+    }
+    return NULL;
+}
+
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+
+    sema_init(&mutex_sema1, 1);
+	sema_init(&mutex_sema2, 1);
+    sema_init(&empty_buffer_sema1,CAPACITY - 1);
+    sema_init(&full_buffer_sema1,0);
+    sema_init(&empty_buffer_sema2,CAPACITY - 1);
+    sema_init(&full_buffer_sema1,0);
+
+  
+	pthread_create(&tids[0],NULL,produce,NULL);
+    pthread_create(&tids[1],NULL,compute,NULL);
+    pthread_create(&tids[2],NULL,consume,NULL);    
+    
+    for(i = 0;i < 3;i++)
+        pthread_join(tids[i],NULL);
+    
+
+    return 0;
+}
 ```
 #### 3.5.2 pc2实验结果
+
+![pc2.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12e7f6a73a3.png)
+
 #### 3.5.3 pc2实验思路
+(1) 信号量的实现
+
+此题与上题思路相同，区别在于实现的时候利用信号量。信号量的定义、初始化、wait和signal定义如下，初始化时可以送入信号量的初始个数，wait一次减少一次信号量个数，signal一次则增加一次信号量个数。
+```
+typedef struct{
+    int value;
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+}sema_t;
+
+void sema_init(sema_t *sema, int value){
+    sema->value = value;
+    pthread_mutex_init(&sema->mutex, NULL);
+    pthread_cond_init(&sema->cond, NULL);
+}
+
+void sema_wait(sema_t *sema){
+    pthread_mutex_lock(&sema->mutex);
+    while(sema->value <= 0)
+        pthread_cond_wait(&sema->cond, &sema->mutex);
+    sema->value--;
+    pthread_mutex_unlock(&sema->mutex);
+}
+
+void sema_signal(sema_t *sema){
+    pthread_mutex_lock(&sema->mutex);
+    ++sema->value;
+    pthread_cond_signal(&sema->cond);
+    pthread_mutex_unlock(&sema->mutex);
+}
+```
+(2)定义信号量并使用
+
+定义两个信号量mutex_sema1,mutex_sema2，分别对(生产者-计算者)与(计算者-消费者)进行线程间互斥。此外也定义了四个信号量
+对共享变量buffer1,buffer2进行线程间同步。
+
+在生产者、计算者、消费者的函数中，先进行P操作等待互斥信号量(上锁)，再P操作获取同步信号量，对buffer中的数据进行操作后，V操作释放互斥信号量及同步信号量(解锁)。这里值得注意的是，需要P操作需要先获取同步信号量再对互斥信号量进行上锁，不然可能造饥饿的现象。
+
+```
+sema_t mutex_sema1,mutex_sema2;
+sema_t empty_buffer_sema1;
+sema_t full_buffer_sema1;
+sema_t empty_buffer_sema2;
+sema_t full_buffer_sema2;
+void *produce(void *arg){
+    int i;
+    char item;
+    
+    for(i = 0;i < ITEM_COUNT;i++){
+        sema_wait(&empty_buffer_sema1);
+        sema_wait(&mutex_sema1);
+        
+        item = 'a' + i;
+        put_item(item,1);
+        printf("produce item:%c\n",item);
+        
+        sema_signal(&mutex_sema1);
+        sema_signal(&full_buffer_sema1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+        sema_wait(&full_buffer_sema1);
+        sema_wait(&mutex_sema1);
+        
+        item = get_item(1);
+        // printf("    compute get item:%c\n",item);
+       
+        sema_signal(&mutex_sema1);
+        sema_signal(&empty_buffer_sema1);
+
+        item -= 32;
+
+        sema_wait(&empty_buffer_sema2);
+        sema_wait(&mutex_sema2);
+        
+        put_item(item,2);
+        printf("    compute put item:%c\n", item);
+        
+        sema_signal(&mutex_sema2);
+        sema_signal(&full_buffer_sema2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i < ITEM_COUNT;i++){
+       
+        sema_wait(&full_buffer_sema2);
+        sema_wait(&mutex_sema2);
+       
+        item = get_item(2);
+        printf("            comsume item:%c\n", item);
+        
+        sema_signal(&mutex_sema2);
+        sema_signal(&empty_buffer_sema2);
+    }
+    return NULL;
+}
+```
+
+(3) main函数中开启三个线程分别对应生产者、计算者、消费者，再对两个互斥信号量以及四个同步信号量进行初始化，调用pthread_join函数等待三个进程的结束即可。
+
+```
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+
+    sema_init(&mutex_sema1, 1);
+	sema_init(&mutex_sema2, 1);
+    sema_init(&empty_buffer_sema1,CAPACITY - 1);
+    sema_init(&full_buffer_sema1,0);
+    sema_init(&empty_buffer_sema2,CAPACITY - 1);
+    sema_init(&full_buffer_sema1,0);
+
+  
+	pthread_create(&tids[0],NULL,produce,NULL);
+    pthread_create(&tids[1],NULL,compute,NULL);
+    pthread_create(&tids[2],NULL,consume,NULL);    
+    
+    for(i = 0;i < 3;i++)
+        pthread_join(tids[i],NULL);
+    
+
+    return 0;
+}
+
+```
 
 ### 3.6 ring.c: 创建N个线程，它们构成一个环
 * 创建N个线程：T1、T2、T3、… TN

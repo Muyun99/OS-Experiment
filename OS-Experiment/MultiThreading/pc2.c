@@ -81,21 +81,11 @@ void sema_signal(sema_t *sema){
     pthread_mutex_unlock(&sema->mutex);
 }
 
-sema_t mutex_sema;
+sema_t mutex_sema1,mutex_sema2;
 sema_t empty_buffer_sema1;
 sema_t full_buffer_sema1;
 sema_t empty_buffer_sema2;
 sema_t full_buffer_sema2;
-
-
-
-
-pthread_mutex_t mutex;
-pthread_cond_t wait_empty_buffer1;
-pthread_cond_t wait_full_buffer1;
-pthread_cond_t wait_empty_buffer2;
-pthread_cond_t wait_full_buffer2;
-
 
 volatile int global = 0;
 
@@ -107,13 +97,13 @@ void *produce(void *arg){
     
     for(i = 0;i < ITEM_COUNT;i++){
         sema_wait(&empty_buffer_sema1);
-        sema_wait(&mutex_sema);
+        sema_wait(&mutex_sema1);
         
         item = 'a' + i;
         put_item(item,1);
         printf("produce item:%c\n",item);
         
-        sema_signal(&mutex_sema);
+        sema_signal(&mutex_sema1);
         sema_signal(&full_buffer_sema1);
     }
     return NULL;
@@ -123,23 +113,23 @@ void *compute(void *arg){
     char item;
     for(i = 0;i < ITEM_COUNT;i++){
         sema_wait(&full_buffer_sema1);
-        sema_wait(&mutex_sema);
+        sema_wait(&mutex_sema1);
         
         item = get_item(1);
-        printf("    compute get item:%c\n",item);
+        // printf("    compute get item:%c\n",item);
        
-        sema_signal(&mutex_sema);
+        sema_signal(&mutex_sema1);
         sema_signal(&empty_buffer_sema1);
 
         item -= 32;
 
         sema_wait(&empty_buffer_sema2);
-        sema_wait(&mutex_sema);
+        sema_wait(&mutex_sema2);
         
         put_item(item,2);
         printf("    compute put item:%c\n", item);
         
-        sema_signal(&mutex_sema);
+        sema_signal(&mutex_sema2);
         sema_signal(&full_buffer_sema2);
     }
     return NULL;
@@ -150,14 +140,14 @@ void *consume(void *arg){
     char item;
     for(i = 0;i < ITEM_COUNT;i++){
        
+        sema_wait(&mutex_sema2);
         sema_wait(&full_buffer_sema2);
-        sema_wait(&mutex_sema);
-       
+        
         item = get_item(2);
         printf("            comsume item:%c\n", item);
-        
-        sema_signal(&mutex_sema);
+    
         sema_signal(&empty_buffer_sema2);
+        sema_signal(&mutex_sema2);
     }
     return NULL;
 }
@@ -168,22 +158,22 @@ int main(){
     in2 = 0;
     out1 = 0;
     out2 = 0;
-    pthread_t tids[2];
+    pthread_t tids[3];
 
-    sema_init(&mutex_sema, 1);
+    sema_init(&mutex_sema1, 1);
+	sema_init(&mutex_sema2, 1);
     sema_init(&empty_buffer_sema1,CAPACITY - 1);
     sema_init(&full_buffer_sema1,0);
     sema_init(&empty_buffer_sema2,CAPACITY - 1);
     sema_init(&full_buffer_sema1,0);
 
   
-    pthread_create(&tids[0],NULL,compute,NULL);
-    pthread_create(&tids[1],NULL,consume,NULL);    
-    produce(NULL);
+	pthread_create(&tids[0],NULL,produce,NULL);
+    pthread_create(&tids[1],NULL,compute,NULL);
+    pthread_create(&tids[2],NULL,consume,NULL);    
     
-    for(i = 0;i < 2;i++)
+    for(i = 0;i < 3;i++)
         pthread_join(tids[i],NULL);
-    pthread_mutex_destroy(&mutex);
     
 
     return 0;
