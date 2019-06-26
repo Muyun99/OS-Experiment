@@ -553,6 +553,184 @@ hello
 ```
 
 #### 2.3.1 sh2 实验代码
+```
+#include<stdio.h>
+#include<stdlib.h>
+#include<errno.h>
+#include<string.h>
+#include<unistd.h>
+#include<fcntl.h>
+#include<sys/wait.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+char *home;
+char *dir;
+int std_in;
+int std_out;
+int mysys(char *command)
+{
+	int status = -1;
+	if(command[0] == '\0')
+	{
+		printf("command not found!\n");
+		return 127; //"command not found!"
+	}
+    pid_t pid;
+    pid = fork();
+    if(pid == 0)
+    {
+        char *argv[100];
+        char *token;
+        char cmd[sizeof(command) + 1];
+        strcpy(cmd, command);
+    
+		//get first substr
+        token = strtok(cmd, " ");
+        int count = 0;
+        while(token != NULL)
+        {
+            argv[count++] = token;
+            token = strtok(NULL," "); 
+        }
+        argv[count] = 0;
+	    if(execvp(argv[0],argv)==-1)
+		{
+			printf("exec failed: ");
+			printf("%d\n",errno);
+		}
+		else
+			status = 1;
+    }
+    else
+        while(waitpid(pid,NULL,0) < 0)
+		{
+			if(errno!=EINTR)
+				status = -1;
+				break;	
+		}
+	
+	dup2(std_in,0);
+	dup2(std_out,1);
+	return status;
+}
+int choose_fun(char *cmd)
+{
+	char argv[100];
+	strcpy(argv,cmd);
+
+	if(argv[0] == '\0')
+		return 0;
+	char *token = strtok(argv, " ");
+
+	if(strcmp(token,"cd") == 0)
+		return 1;
+	else if(strcmp(token,"exit") == 0)
+		return 2;
+	else
+		return 0;
+}
+
+int loop()
+{
+	printf("debug1");
+	char buff[100];
+	char tempstr[100];
+	home = getenv("HOME");
+	dir = getcwd(NULL,0);
+	printf("[%s]> ",dir);
+	gets(buff);
+
+	char *a = NULL;
+	char *b = NULL;
+	a = strchr(buff, '<');
+	b = strchr(buff, '>');
+	
+	int inindex = 0;
+	int outindex = 0;
+	int count = 0;
+
+	char *argv[100];
+	char *token;
+	char cmd[sizeof(buff) + 1];
+	strcpy(cmd, buff);
+	token = strtok(cmd,"");
+	while(token != NULL)
+	{
+		if(strchr(token,'<'))
+			inindex = count+1;
+		else if(strchr(token,'>'))
+			outindex = count+1;
+		argv[count++] = token;
+		token = strtok(cmd," ");
+	}
+
+	if(a != NULL && b != NULL)
+	{
+		char *in = argv[inindex];
+		char *out = argv[outindex];
+		int fdin,fdout;
+		fdin = open(in,O_RDWR,0666);
+		fdout = open(out,O_CREAT|O_RDWR,0666);
+		if(fdin == -1)
+		{
+			printf("File %s open failed!\n",in);
+			return -1;
+		}
+		if(fdout == -1)
+		{
+			printf("File %s open failed!\n",out);
+			return -1;
+		}
+		dup2(fdin,0);
+		dup2(fdout,1);
+		close(fdin);
+		close(fdout);
+		return mysys(buff);
+	}
+	else if(a != NULL)
+	{
+		char *in = argv[inindex];
+		int fdin = open(in, O_RDWR, 0666);
+		dup2(fdin,0);
+		close(fdin);
+		return mysys(buff);
+	}
+	else if(b != NULL)
+	{
+		char *out = argv[outindex];
+		int fdout = open(out, O_CREAT|O_RDWR, 0666);
+		dup2(fdout,1);
+		close(fdout);
+		return mysys(buff);
+	}
+	else
+	{
+		printf("debug1");
+		int cmdStatus = choose_fun(buff);
+		if(cmdStatus == 0)
+			mysys(buff);
+		else if(cmdStatus == 1)
+		{
+			char targetdir[256];
+			sscanf(buff,"cd %s",targetdir);
+			chdir(targetdir);
+		}
+		else if(cmdStatus == 2)
+			exit(0);
+	}
+}
+int main()
+{
+	std_in = dup(0);
+	std_out = dup(1);
+	while(1)
+	{
+		loop();
+	}
+	return 0;
+}
+
+```
 
 #### 2.3.2 sh2 实验结果
 
@@ -575,6 +753,64 @@ hello
 函数功能：dup2 可以用 newfd 参数指定新描述符的数值，如果 newfd 已经打开，则先将其关闭。如果 newfd 等于 oldfd，则 dup2 返回 newfd, 而不关闭它。dup2 函数返回的新文件描述符同样与参数 oldfd 共享同一文件表项。
 
 函数示例：
+
+```
+std_in = dup(0);
+dup2(std_in,0);
+```
+
+2.实验思路
+(1) 查看有无需要重定向的部分,定义a,b指针，调用strchr()函数扫描是否有'<'以及'>'字符。并且将指令按照空格解析出argv数组，并记录下'<'与'>'出现的位置，这样能够找到需要重定向的文件名了。扫描结果分别对应四个入如下。
+扫描结果 | 解释 | 对应入口
+--|--|--
+当a，b都不为空时 | 既有输出重定向，又有输入重定向 | 重定向输入与输出后判断调用mysys
+当a为空，b不为空时 | 只有输出重定向，没有输入重定向 | 重定向输出后调用mysys
+当b为空，a不为空时 | 没有输出重定向，只有输入重定向 | 重定向输入后调用mysys
+当a,b都为空时 | 没有输入和输出重定向 | 直接调用mysys
+```
+    char *a = NULL;
+	char *b = NULL;
+	a = strchr(buff, '<');
+	b = strchr(buff, '>');
+    if(a != NULL && b != NULL){}
+	else if(a != NULL) {}
+    else if(b != NULL) {}
+    else {}
+```
+(2) 在重定向时用到了dup2这个命令，我们需要先正确打开对应的文件，然后调用dup2命令进行重定向。由于cd与exit命令无需用到重定向，所以在完成本条指令之后需要在mysys中将重定向后的再重定向回来。
+```
+int mysys(char *command)
+{   ...
+    dup2(std_in,0);
+	dup2(std_out,1);
+    return status;
+}
+
+if(a != NULL && b != NULL)
+{
+    char *in = argv[inindex];
+    char *out = argv[outindex];
+    int fdin,fdout;
+    fdin = open(in,O_RDWR,0666);
+    fdout = open(out,O_CREAT|O_RDWR,0666);
+    if(fdin == -1)
+    {
+        printf("File %s open failed!\n",in);
+        return -1;
+    }
+    if(fdout == -1)
+    {
+        printf("File %s open failed!\n",out);
+        return -1;
+    }
+    dup2(fdin,0);
+    dup2(fdout,1);
+    close(fdin);
+    close(fdout);
+    return mysys(buff);
+}
+
+```
 
 ### 2.4 sh3.c: 实现 shell 程序，要求在第 2 版的基础上，添加如下功能
 
@@ -773,13 +1009,148 @@ int main()
 - 主线程等待辅助线程运行結束后,使用归并排序算法归并数组的前半部分和后半部分
 
 #### 3.3.1 sort 实验代码
+```
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<pthread.h>
 
+#define MAX_ARRAY 100
+#define MAX_NUM 10000
+
+void *selectSort(void *argc){
+    int *argv = (int *)argc;
+    int i,j,min,record = -1,temp;
+    for(i = 0;i < MAX_ARRAY/2; ++i){
+        min = argv[i];
+        for(j = i;j < MAX_ARRAY / 2;++j){
+            if(argv[j] < min){
+                record = j;
+                min = argv[j];
+            }
+        }
+        temp = argv[i];
+        argv[i] = argv[record];
+        argv[record] = temp;
+    }
+    return NULL;
+}
+
+void Merge(int *arg1, int*arg2){
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    for(j = MAX_ARRAY/2;i < MAX_ARRAY/2 && j < MAX_ARRAY;++k){
+        if(arg1[i] < arg1[j])
+            arg2[k] = arg1[i++];
+        else
+            arg2[k] = arg1[j++];
+    }
+    while(i < MAX_ARRAY/2)
+        arg2[k++] = arg1[i++];
+    while(j < MAX_ARRAY)
+        arg2[k++] = arg1[j++];
+    
+}
+void printArray(int *array){
+    int i = 0;
+    for(;i<MAX_ARRAY;++i)
+	{
+        printf("%5d ",array[i]);
+		if((i+1) % 10 == 0 && i!=1)
+			printf("\n");
+	}
+	printf("\n");
+}
+int main(){
+    int array[MAX_ARRAY],result[MAX_ARRAY];
+    int i;
+    for(i = 0;i < MAX_ARRAY; ++i)
+        array[i] = (rand() % MAX_NUM);
+
+    printf("[UnSort ARRAY]!\n");
+    printArray(array);
+    pthread_t tid;
+    int *arg = &array[MAX_ARRAY/2];
+    selectSort(array);
+    pthread_create(&tid, NULL, selectSort, (void *)arg);
+    pthread_join(tid,NULL);
+
+    printf("[SELECTSORT ARRAY]!\n");
+    printArray(array);
+    
+    Merge(array,result);
+    printf("[Sorted RESULT]!\n");
+    printArray(result);
+    return 0;
+}
+
+```
 #### 3.3.2 sort 实验结果
 
 ![sort1.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d1329b961faf.png)
 ![sort2.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d1329b960498.png)
 
 #### 3.3.3 sort 实验思路
+(1)首先随机生成了100个数，将其打印。主线程调用selectSort函数进行前半部分的排序，采用pthread_create函数创建辅助线程，辅助线程使用选择排序算法对数组的后半部分排序。将辅助线程的排序任务起止点利用线程入口函数的参数传入。线程入口函数采用选择排序。使用pthread_join函数等待辅助线程结束。
+```
+void *selectSort(void *argc){
+    int *argv = (int *)argc;
+    int i,j,min,record = -1,temp;
+    for(i = 0;i < MAX_ARRAY/2; ++i){
+        min = argv[i];
+        for(j = i;j < MAX_ARRAY / 2;++j){
+            if(argv[j] < min){
+                record = j;
+                min = argv[j];
+            }
+        }
+        temp = argv[i];
+        argv[i] = argv[record];
+        argv[record] = temp;
+    }
+    return NULL;
+}
+
+int array[MAX_ARRAY],result[MAX_ARRAY];
+int i;
+for(i = 0;i < MAX_ARRAY; ++i)
+    array[i] = (rand() % MAX_NUM);
+
+printf("[UnSort ARRAY]!\n");
+printArray(array);
+pthread_t tid;
+int *arg = &array[MAX_ARRAY/2];
+selectSort(array);
+pthread_create(&tid, NULL, selectSort, (void *)arg);
+pthread_join(tid,NULL);
+
+printf("[SELECTSORT ARRAY]!\n");
+printArray(array);
+
+```
+(2)使用merge函数归并数组的前半部分和后半部分,直接在主线程里调用自定义的Merge函数即可将两个选择排序的结果归并排序完成。
+```
+void Merge(int *arg1, int*arg2){
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    for(j = MAX_ARRAY/2;i < MAX_ARRAY/2 && j < MAX_ARRAY;++k){
+        if(arg1[i] < arg1[j])
+            arg2[k] = arg1[i++];
+        else
+            arg2[k] = arg1[j++];
+    }
+    while(i < MAX_ARRAY/2)
+        arg2[k++] = arg1[i++];
+    while(j < MAX_ARRAY)
+        arg2[k++] = arg1[j++];
+    
+}
+Merge(array,result);
+printf("[Sorted RESULT]!\n");
+printArray(result);
+```
 
 ### 3.4 pc1.c: 使用条件变量解决生产者、计算者、消费者问题
 
