@@ -1,89 +1,100 @@
-#include<sys/stat.h>
-#include<fcntl.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<unistd.h>
-
-struct record
+#include <stdio.h>
+#include <sys/types.h>
+//#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>  
+#include <sys/stat.h>
+#include <fcntl.h>
+void strip_char(char *s, char bad)
 {
-    char name[12];
-    int age;
-};
-
-void panic(char *message)
-{
-    perror(message);
-    exit(EXIT_FAILURE);
+    size_t i;
+    size_t len = strlen(s);
+    size_t offset = 0;
+    for(i = 0; i < len; ++i){
+        char c = s[i];
+        if(c==bad) ++offset;
+        else s[i-offset] = c;
+    }
+    s[len-offset] = '\0';
 }
 
-//保存被打开数据库的文件描述符
-int fd;
-
-//用于打开或者创建一个数据库
-void db_open(char *path)
+void strip_dup(char *s)
 {
-    //指定新创建数据库文件的权限
-    //O_RDWR，可以对文件进行读或者写
-    //O_APPEND，文件以追加模式打开，写文件时会把数据追加到文件末尾
-    //O_CREAT，如果文件不存在，则创建该文件
-    mode_t mode = 0777;
-    fd = open(path,O_RDWR | O_APPEND | O_CREAT, mode);
-    
-    if (fd < 0)
-        panic("open error");
+    size_t i;
+    size_t len = strlen(s);
+
+    for(i = 0; i < len; ++i)
+	{
+        char c = s[i];
+        if(c == '<' || c == '>')
+			s[i] = '\0';
+    }
 }
 
-//关闭数据库
-void db_close()
-{
-    close (fd);
-}
-
-//用于向数据库中插入一条记录
-//以O_APPEND作为参数打开数据库
-//写文件时，总是将数据追加到文件尾部
-void db_append(char *name, int age)
-{
-    struct record record;
-    strcpy(record.name, name);
-    record.age = age;
-
-    int count = write(fd, &record, sizeof(struct record));
-    if (count < 0)
-        panic("Write Error");
-}
-
-//根据记录号index打印数据库中的一条记录
-void db_dump(int index)
-{
-    //根据记录号index，计算记录的偏移量
-    //调用lseek设置文件访问位置为offset
-    int offset = index * sizeof(struct record);
-    lseek(fd, offset, SEEK_SET);
-
-    //调用read在文件的offset位置处读取一条记录
-    struct record record;
-    
-    int count = read(fd, &record, sizeof(struct record));
-    if(count != sizeof(struct record))
-        panic("Read Error");
-    
-    printf("name = %6s, age = %d\n",record.name,record.age);
-}
 int main()
 {
-    //char *pathname = "my db";
-    db_open("my db");
-    db_append("tom", 10);
-    db_append("jerry", 11);
-    db_append("miky", 12);
+    char code[256];
+    char buff[256];
+    char str1[256];
+    char str2[256];
+    char str3[256];
+    strcpy(code, buff);
 
-    db_dump(0);
-    db_dump(1);
-    db_dump(2);
+    strcpy(code,"echo < log > newlog");
+    
+    char *argv[100];
+    char *token;
+    char cmd[sizeof(code) + 1];
+    strcpy(cmd, code);
 
-    db_close();
-    getchar();
-    return 0;
+    //get first substr
+    token = strtok(cmd, " ");
+    int count = 0;
+    int in = 0;
+    int out = 0;
+
+    while(token != NULL)
+    {
+        // printf("%d:%s\n",count,token);
+        if(strchr(token,'<'))
+        // if(token == ">")
+            in = count;
+        else if(strchr(token,'>'))
+            out = count;
+        argv[count++] = token;
+        token = strtok(NULL," "); 
+        // printf("%d\n%d\n",in,out);
+        
+    }
+    argv[count] = 0;
+    // printf("%d\n%d\n",in,out);
+    printf("%s \n",argv[in+1]);
+    printf("%s \n",argv[out+1]);      
+    // for(int i = 0;i<count;++i)
+    //     printf("%s \n",argv[i]);   
+
+    // sscanf(code,"%s >",str1);
+    // printf("%s \n",code);
+    // printf("%s \n",str1);
+    // printf("%s \n",str2);
+    // printf("code: %s\n",code);
+
+    // char *a = NULL;
+	// char *b = NULL;
+
+	// a = strchr(buff, '<');
+	// b = strchr(buff, '>');
+    // strip_dup(code);
+
+    // char *in = a + 1 - buff + code;
+	// char *out = b + 1 - buff + code;
+    // strip_char(in, ' ');
+	// strip_char(out, ' ');
+    // // printf("code:%s\n",code);
+    // // printf("in:%s\n",in);
+    // // printf("out:%s\n",out);
+    
 }
+

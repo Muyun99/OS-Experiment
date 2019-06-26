@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<pthread.h>
-#define N 10
+#define N 100
 int buffer = 0;
 
 void *add(void *arg){
@@ -37,10 +37,10 @@ int main(){
         printf("to T[%d] send %d\n",i+1,result[0]);
         pthread_create(&tids[i],NULL,add,result);
         pthread_join(tids[i], (void *)&result);
-        sleep(1);
-    }
-    
-    
+		if(i == 0)
+			break;
+       // sleep(1);
+    } 
 
     return 0;
 }

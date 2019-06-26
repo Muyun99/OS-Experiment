@@ -43,7 +43,12 @@ void Merge(int *arg1, int*arg2){
 void printArray(int *array){
     int i = 0;
     for(;i<MAX_ARRAY;++i)
-        printf("%d\n",array[i]);
+	{
+        printf("%5d ",array[i]);
+		if((i+1) % 10 == 0 && i!=1)
+			printf("\n");
+	}
+	printf("\n");
 }
 int main(){
     int array[MAX_ARRAY],result[MAX_ARRAY];
@@ -51,7 +56,7 @@ int main(){
     for(i = 0;i < MAX_ARRAY; ++i)
         array[i] = (rand() % MAX_NUM);
 
-    printf("INIT ARRAY!\n");
+    printf("[UnSort ARRAY]!\n");
     printArray(array);
     pthread_t tid;
     int *arg = &array[MAX_ARRAY/2];
@@ -59,11 +64,11 @@ int main(){
     pthread_create(&tid, NULL, selectSort, (void *)arg);
     pthread_join(tid,NULL);
 
-    printf("SELECTSORT!\n");
+    printf("[SELECTSORT ARRAY]!\n");
     printArray(array);
     
     Merge(array,result);
-    printf("FINAL RESULT!\n");
+    printf("[Sorted RESULT]!\n");
     printArray(result);
     return 0;
 }
