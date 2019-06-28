@@ -37,6 +37,7 @@ void Split(char *ch){
         while(i < count)
             filename[j++] = ch[i++];
         cmd[count][j] = 0;
+        write
     }
 }
 

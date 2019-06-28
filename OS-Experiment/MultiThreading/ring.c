@@ -29,7 +29,7 @@ int main(){
 
     pthread_t tids[N];
     pthread_create(&tids[0],NULL,add,(void *)array[0]);
-    pthread_join(tids[0], (void *)&result);
+    pthread_join(tids[0], (void *)&result);，
     
     while(i < N){
         printf("from T[%d]", i+1);
