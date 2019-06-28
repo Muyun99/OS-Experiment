@@ -10,7 +10,6 @@ void *add(void *arg){
     num[1] = num[0] + 1;
     int *result = num;
 }
-
 int main()
 {
     int buff[N][2];
