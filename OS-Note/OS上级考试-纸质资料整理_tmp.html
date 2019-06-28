@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OS上级考试-纸质资料整理.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="12016%E5%B9%B4os%E8%80%83%E8%AF%95%E9%A2%98">1.2016年OS考试题</h1>
+<h3 id="%E9%A2%98%E7%9B%AE1">题目1</h3>
+<ol>
+<li>主进程创建1个子进程
+<ul>
+<li>进程通过管道与子进程连接</li>
+<li>子进程的标准输出连接到管道的写端</li>
+</ul>
+</li>
+<li>主进程的标准输入连接到管道的读端</li>
+<li>在子进程中调用exec(“echo”, “echo”, “hello world”, NULL)</li>
+<li>在父进程中调用read(0, buf, sizeof(buf))，从标准输入中获取子进程发送的字符串，并打印出来</li>
+</ol>
+<h4 id="%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">实验代码</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+
+int main()
+{
+    int fd[2];
+    char buff[32];
+    pipe(fd);
+
+
+    pid_t tid;
+    tid = fork();
+
+    if(tid == 0)//children
+    {
+        dup2(fd[1],1);
+        close(fd[0]);
+        close(fd[1]);
+        execlp(&quot;echo&quot;,&quot;echo&quot;,&quot;hello wolrd&quot;,NULL);
+        exit(0);
+    }
+    else//parent
+    {
+
+        dup2(fd[0],0);
+        close(fd[0]);
+        close(fd[1]);
+        int readsize = read(0,buff,sizeof(buff));
+        write(1,buff,readsize);
+    }
+    return 0;
+}
+
+</div></code></pre>
+<h3 id="%E9%A2%98%E7%9B%AE2">题目2</h3>
+<ol>
+<li>主进程创建2个子进程，主进程通过两个管道分别与两个子进程连接</li>
+<li>第一个子进程计算从1加到50的和，并将结果通过管道送给父进程</li>
+<li>第一个子进程计算从50加到100的和，并将结果通过管道送给父进程</li>
+<li>父进程读取两个子进程的结果，将他们相加，打印出来，结果为5050</li>
+</ol>
+<h4 id="%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">实验代码</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+
+int computeResult(int start,int end)
+{
+    int result = 0;
+    for(int i = start;i &lt;= end;i++)
+        result += i;
+    return result;
+}
+
+int main()
+{
+    pid_t pid1,pid2;
+    pid1 = -1;
+    pid2 = -1;
+    int fd1[2],fd2[2];
+    pipe(fd1);
+    pipe(fd2);
+
+
+    pid1 = fork();
+    if(pid1 &gt; 0)
+    {
+        pid2 = fork();
+    }
+    if(pid1 == 0) //child1
+    {
+        int result1 =  computeResult(1,50);
+        printf(&quot;result1:%d\n&quot;,result1);
+        write(fd1[1],&amp;result1,sizeof(result1));
+        exit(1);
+    }
+    if(pid2 == 0)//child2
+    {
+        int result2 = computeResult(51,100);
+        printf(&quot;result23:%d\n&quot;,result2);
+        write(fd2[1],&amp;result2,sizeof(result2));
+        exit(1);
+    }
+    if(pid1 &gt; 0)
+    {
+        int result1,result2;
+        read(fd1[0],&amp;result1,sizeof(result1));
+        read(fd2[0],&amp;result2,sizeof(result2));
+
+        int result = result1 + result2;
+        printf(&quot;result:%d\n&quot;,result);
+    }
+    return 0;
+}
+
+</div></code></pre>
+<h3 id="%E9%A2%98%E7%9B%AE3">题目3</h3>
+<ol>
+<li>主线程创建10个子线程 - 第0个子线程计算从01加到10的和 - 第1个子线程计算从11加到20的和 - 第2个子线程计算从21加到30的和 - ... - 第9个子线程计算从91加到100的和</li>
+<li>主线程归并10个子线程的计算结果，最终结果为5050</li>
+<li>本题必须使用线程参数来完成</li>
+</ol>
+<h4 id="%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">实验代码</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+#define N 10
+struct param{
+    int start;
+    int end;
+};
+struct result{
+    int sum;
+};
+void *add(void *arg)
+{
+    struct param *param = (struct param*) arg;
+    struct result *result = malloc(sizeof(struct result));
+    result-&gt;sum = 0;
+
+    for(int i = param-&gt;start;i &lt;= param-&gt;end;i++)
+        result-&gt;sum += i;
+    return result;
+}
+int main()
+{
+    int i = 0;
+    struct param params[N];
+    struct result result[N];
+    pthread_t tids[N];
+    int finalresult = 0;
+    for(i = 0;i &lt; N;i++)
+    {
+        struct param *param = &amp;params[i];
+        struct result *result = malloc(sizeof(struct result));
+        param-&gt;start = i * 10 + 1;
+        param-&gt;end = (i + 1) * 10;
+        pthread_create(&amp;tids[i],NULL,add,(void *)param);
+        pthread_join(tids[i],(void **)&amp;result);
+        finalresult += result-&gt;sum;
+        free(result);
+    }
+    printf(&quot;%d&quot;,finalresult);
+    //printf(&quot;result: %d&quot;,result);
+    return 0;
+}
+
+</div></code></pre>
+<h3 id="%E9%A2%98%E7%9B%AE4">题目4</h3>
+<ol>
+<li>主线程创建4个子线程T1、T2、T3、T4，主线程在4个子线程退出后，才退出</li>
+<li>线程T1、T2、T3、T4的运行时代码如下：</li>
+</ol>
+<pre class="hljs"><code><div>#include &lt;unistd.h&gt; // sleep函数声明在该头文件中
+
+void *T1_entry(void *arg)
+{
+    sleep(2);  // 睡眠2秒，不准删除此条语句，否则答题无效
+    puts(“T1”);
+}
+
+void *T2_entry(void *arg)
+{
+    sleep(1);  // 睡眠1秒，不准删除此条语句，否则答题无效
+    puts(“T2”);
+}
+
+void *T3_entry(void *arg)
+{
+    sleep(1);  // 睡眠1秒，不准删除此条语句，否则答题无效
+    puts(“T3”);
+}
+
+void *T4_entry(void *arg)
+{
+    puts(“T4”);
+}
+</div></code></pre>
+<ol start="3">
+<li>使用信号量或者条件变量机制(而不是使用sleep函数)，使得这四个线程满足如下制约关系：
+<ul>
+<li>T1的print语句执行后，T2和T3才可以执行print语句</li>
+<li>T2和T3的print语句执行后，T4才可以执行print语句</li>
+</ul>
+</li>
+<li>程序输出结果为</li>
+</ol>
+<pre class="hljs"><code><div>T1
+T2
+T3
+T4
+</div></code></pre>
+<p>或者</p>
+<pre class="hljs"><code><div>T1
+T3
+T2
+T4
+</div></code></pre>
+<h4 id="%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81---1%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F-by-logicjake">实验代码 - 1(调用系统的信号量和条件变量) by LogicJake</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+int t1_gone = 0,t2_gone = 0,t3_gone = 0,t4_gone = 0;
+pthread_mutex_t mutex1,mutex2;
+pthread_cond_t signal1,signal2;
+void *T1_entry(void *arg)
+{
+    pthread_mutex_lock(&amp;mutex1);
+
+    sleep(2);
+    puts(&quot;T1&quot;);
+
+    t1_gone = 1;
+    pthread_cond_broadcast(&amp;signal1);
+    pthread_mutex_unlock(&amp;mutex1);
+
+}
+void *T2_entry(void *arg)
+{
+    pthread_mutex_lock(&amp;mutex1);
+    while(!t1_gone)
+        pthread_cond_wait(&amp;signal1,&amp;mutex1);
+    pthread_mutex_unlock(&amp;mutex1);
+
+    sleep(1);
+    puts(&quot;T2&quot;);
+
+    pthread_mutex_lock(&amp;mutex2);
+    t2_gone = 1;
+    pthread_cond_signal(&amp;signal2);
+    pthread_mutex_unlock(&amp;mutex2);
+
+}
+void *T3_entry(void *arg)
+{
+    pthread_mutex_lock(&amp;mutex1);
+    while(!t1_gone)
+        pthread_cond_wait(&amp;signal1,&amp;mutex1);
+    pthread_mutex_unlock(&amp;mutex1);
+
+    sleep(1);
+    puts(&quot;T3&quot;);
+
+    pthread_mutex_lock(&amp;mutex2);
+    t3_gone = 1;
+    pthread_cond_signal(&amp;signal2);
+    pthread_mutex_unlock(&amp;mutex2);
+}
+void *T4_entry(void *arg)
+{
+    pthread_mutex_lock(&amp;mutex2);
+    while(!t2_gone || !t3_gone)
+        pthread_cond_wait(&amp;signal2,&amp;mutex2);
+
+    puts(&quot;T4&quot;);
+
+    pthread_mutex_unlock(&amp;mutex2);
+}
+int main()
+{
+    pthread_t tids[4];
+    pthread_create(&amp;tids[0],0,T1_entry,NULL);
+    pthread_create(&amp;tids[1],0,T2_entry,NULL);
+    pthread_create(&amp;tids[2],0,T3_entry,NULL);
+    pthread_create(&amp;tids[3],0,T4_entry,NULL);
+
+    pthread_join(tids[3],NULL);
+}
+
+</div></code></pre>
+<h4 id="%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81---2%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%BF%A1%E5%8F%B7%E9%87%8F---by-logicjake">实验代码 - 2(自己实现信号量) - by LogicJake</h4>
+<pre class="hljs"><code><div>#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+
+typedef struct {
+	int value;
+	pthread_mutex_t mutex;
+	pthread_cond_t cond;
+}sema_t;
+
+sema_t t1_2_ready;
+sema_t t1_3_ready;
+sema_t t2_ready;
+sema_t t3_ready;
+
+
+void sema_init(sema_t *sema, int value)
+{
+	sema-&gt;value = value;
+	pthread_mutex_init(&amp;sema-&gt;mutex, NULL);
+	pthread_cond_init(&amp;sema-&gt;cond, NULL);
+}
+
+void sema_wait(sema_t *sema)
+{
+	pthread_mutex_lock(&amp;sema-&gt;mutex);
+	while (sema-&gt;value &lt;= 0)
+        	pthread_cond_wait(&amp;sema-&gt;cond, &amp;sema-&gt;mutex);
+    	sema-&gt;value--;
+	pthread_mutex_unlock(&amp;sema-&gt;mutex);
+}
+
+void sema_signal(sema_t *sema)
+{
+	pthread_mutex_lock(&amp;sema-&gt;mutex);
+	++sema-&gt;value;
+	pthread_cond_signal(&amp;sema-&gt;cond);
+	pthread_mutex_unlock(&amp;sema-&gt;mutex);
+}
+
+void *T1_entry(void *arg)
+{
+	sleep(2);  // 睡眠2秒，不准删除此条语句，否则答题无效
+	puts(&quot;T1&quot;);
+	sema_signal(&amp;t1_2_ready);
+	sema_signal(&amp;t1_3_ready);
+
+}
+
+void *T2_entry(void *arg)
+{
+	sema_wait(&amp;t1_2_ready);
+	sleep(1);  // 睡眠1秒，不准删除此条语句，否则答题无效
+	puts(&quot;T2&quot;);
+	sema_signal(&amp;t2_ready);
+}
+
+void *T3_entry(void *arg)
+{
+	sema_wait(&amp;t1_3_ready);
+	sleep(1);  // 睡眠1秒，不准删除此条语句，否则答题无效
+	puts(&quot;T3&quot;);
+	sema_signal(&amp;t3_ready);
+
+}
+
+void *T4_entry(void *arg)
+{
+	sema_wait(&amp;t2_ready);
+	sema_wait(&amp;t3_ready);
+	puts(&quot;T4&quot;);
+}
+
+int main()
+{
+	sema_init(&amp;t1_2_ready,0);
+	sema_init(&amp;t1_3_ready,0);
+	sema_init(&amp;t2_ready,0);
+	sema_init(&amp;t3_ready,0);
+
+	pthread_t T1,T2,T3,T4;
+	pthread_create(&amp;T1, NULL, T1_entry, NULL);
+	pthread_create(&amp;T2, NULL, T2_entry, NULL);
+	pthread_create(&amp;T3, NULL, T3_entry, NULL);
+	pthread_create(&amp;T4, NULL, T4_entry, NULL);
+	pthread_join(T1,NULL);
+	pthread_join(T2,NULL);
+	pthread_join(T3,NULL);
+	pthread_join(T4,NULL);
+	return 0;
+}
+</div></code></pre>
+<h1 id="%E4%B8%80%E4%BA%9B%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81">一些自己写的代码</h1>
+<h3 id="1-sh1----%E8%BF%9B%E7%A8%8B-%E4%B8%80%E4%BA%9B%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C">1. sh1  -- 进程 + 一些字符串操作</h3>
+<h4 id="sh1-%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">sh1 实验思路</h4>
+<ul>
+<li>该程序读取用户输入的命令，调用函数 mysys(上一个作业)执行用户的命令，示例如下</li>
+</ul>
+<pre class="hljs"><code><div># 编译sh1.c
+$ cc -o sh1 sh1.c
+
+# 执行sh1
+$ ./sh
+
+# sh1打印提示符&gt;，同时读取用户输入的命令echo，并执行输出结果
+&gt; echo a b c
+a b c
+
+# sh1打印提示符&gt;，同时读取用户输入的命令cat，并执行输出结果
+&gt; cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+</div></code></pre>
+<ul>
+<li>请考虑如何实现内置命令 cd、pwd、exit</li>
+</ul>
+<h4 id="sh1-%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">sh1 实验思路</h4>
+<p>1.先验知识</p>
+<p>(1) execvp 函数</p>
+<p>int execvp(const char _file, char _ const argv []);</p>
+<p>execvp()会从 PATH 环境变量所指的目录中查找符合参数 file 的文件名, 找到后便执行该文件, 然后将第二个参数 argv 传给该欲执行的文件</p>
+<p>(2) strtok 函数</p>
+<p>char *strtok(char *str, const char *delim)</p>
+<p>str -- 要被分解成一组小字符串的字符串</p>
+<p>delim -- 包含分隔符的 C 字符串。</p>
+<p>该函数返回被分解的第一个子字符串，如果没有可检索的字符串，则返回一个空指针。</p>
+<p>(3) sscanf()</p>
+<p>函数原型：int sscanf(const char _<strong>restrict</strong> _Src, const char _<strong>restrict</strong> _Format, ...)</p>
+<p>函数功能：从一个字符串中读进与指定格式相符的数据的函数。sscanf 与 scanf 类似，都是用于输入的，只是后者以屏幕(stdin)为输入源，前者以固定字符串为输入源。</p>
+<p>函数示例：sscanf(buff,&quot;cd %s&quot;,targetdir);</p>
+<p>2.实验思路</p>
+<p>(1) 先判断其是否为内置指令 cd 以及 exit。调用 strtok 函数获得指令的一个命令字，若是 cd 命令则返回 1，若是 exit 指令则返回 2，若都不是则返回 3</p>
+<pre class="hljs"><code><div>int choose_fun(char *cmd)
+{
+	char argv[100];
+	strcpy(argv,cmd);
+
+	if(argv[0] == '\0')
+		return 0;
+	char *token = strtok(argv, &quot; &quot;);
+
+	if(strcmp(token,&quot;cd&quot;) == 0)
+		return 1;
+	else if(strcmp(token,&quot;exit&quot;) == 0)
+		return 2;
+	else
+		return 0;
+}
+</div></code></pre>
+<p>(2) main 函数中对 choose_fun 返回的状态进行判断，若是普通指令则调用 mysys 函数执行，若是 cd 指令调用 sscanf 指令对指令字符串进行解析得到 targetdir 然后改变路径至 targetdir</p>
+<pre class="hljs"><code><div>int main()
+{
+	home = getenv(&quot;HOME&quot;);
+	char buff[100];
+	while(1)
+	{
+		dir = getcwd(NULL,0);
+		printf(&quot;[%s]&gt; &quot;,dir);
+		gets(buff);
+
+		int cmdStatus = choose_fun(buff);
+
+		if(cmdStatus == 0)
+			mysys(buff);
+		else if(cmdStatus == 1)
+		{
+			char targetdir[256];
+			sscanf(buff,&quot;cd %s&quot;,targetdir);
+			chdir(targetdir);
+		}
+		else if(cmdStatus == 2)
+			exit(0);
+	}
+}
+</div></code></pre>
+<h4 id="sh1-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">sh1 实验代码</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;errno.h&gt;
+#include&lt;string.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;sys/wait.h&gt;
+#include&lt;sys/types.h&gt;
+char *home;
+char *dir;
+int mysys(char *command)
+{
+	if(command[0] == '\0')
+	{
+		printf(&quot;command not found!\n&quot;);
+		return 127; //&quot;command not found!&quot;
+	}
+    int pid;
+    pid = fork();
+    if(pid == 0)
+    {
+        char *argv[100];
+        char *token;
+        char cmd[sizeof(command) + 1];
+        strcpy(cmd, command);
+
+		//get first substr
+        token = strtok(cmd, &quot; &quot;);
+        int count = 0;
+        while(token != NULL)
+        {
+            argv[count++] = token;
+            token = strtok(NULL,&quot; &quot;);
+        }
+        argv[count] = 0;
+	    if(execvp(argv[0],argv) == -1)
+            printf(&quot;exec failed: %d\n&quot;,errno);
+    }
+    else
+        wait(NULL);
+
+}
+
+int choose_fun(char *cmd)
+{
+	char argv[100];
+	strcpy(argv,cmd);
+
+	if(argv[0] == '\0')
+		return 0;
+	char *token = strtok(argv, &quot; &quot;);
+
+	if(strcmp(token,&quot;cd&quot;) == 0)
+		return 1;
+	else if(strcmp(token,&quot;exit&quot;) == 0)
+		return 2;
+	else
+		return 0;
+}
+
+int main()
+{
+	home = getenv(&quot;HOME&quot;);
+	char buff[100];
+	while(1)
+	{
+		dir = getcwd(NULL,0);
+		printf(&quot;[%s]&gt; &quot;,dir);
+		gets(buff);
+
+		int cmdStatus = choose_fun(buff);
+
+		if(cmdStatus == 0)
+			mysys(buff);
+		else if(cmdStatus == 1)
+		{
+			char targetdir[256];
+			sscanf(buff,&quot;cd %s&quot;,targetdir);
+			chdir(targetdir);
+		}
+		else if(cmdStatus == 2)
+			exit(0);
+	}
+}
+
+</div></code></pre>
+<h3 id="2-ringc----%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">2. ring.c -- 多线程 + 参数传递</h3>
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/29/5d16613eae837.png" alt="2019.png"></p>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+#define N 10
+#define LOOPCOUNT 25
+
+void *add(void *arg){
+    int *num = (int *)arg;
+    num[1] = num[0] + 1;
+    int *result = num;
+}
+int main()
+{
+    int buff[N][2];
+    int i = 0;
+    for(i = 0;i &lt; N;i++)
+    {
+        buff[i][0]=0;
+        buff[i][1]=0;
+    }
+    pthread_t tids[N];
+
+    i = 0;
+    int count = 0;
+    while(i &lt; N)
+    {
+        count++;
+        if(count == LOOPCOUNT)
+            break;
+
+        printf(&quot;from T[%d]&quot;,i+1);
+        pthread_create(&amp;tids[i],NULL,add,(void *)&amp;buff[i]);
+        pthread_join(tids[i],NULL);
+        int result = buff[i][1];
+
+        i = (i+1) % N;
+        buff[i][0] = result;
+        printf(&quot;to T[%d] send %d\n&quot;,i+1,result);
+    }
+    return 0;
+}
+
+</div></code></pre>
+<h3 id="3-pipec----%E5%A4%9A%E8%BF%9B%E7%A8%8B-%E7%AE%A1%E9%81%93">3. pipe.c -- 多进程 + 管道</h3>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+
+int main()
+{
+    int std_in = dup(0);
+    int std_out = dup(1);
+    pid_t tid1 = -1,tid2 = -1;
+    int fd1[2],fd2[2];
+    pipe(fd1);
+    pipe(fd2);
+
+    tid1 = fork();
+    if(tid1 &gt; 0)
+    {
+        tid2 = fork();
+    }
+    if(tid1 == 0) //cat
+    {
+        dup2(fd1[1],1);
+        close(fd1[0]);
+        close(fd1[1]);
+        execlp(&quot;cat&quot;,&quot;cat&quot;,&quot;/etc/passwd&quot;,NULL);
+    }
+    if(tid2 == 0) //grep
+    {
+        dup2(fd1[0],0);
+        close(fd1[0]);
+        close(fd1[1]);
+        // char buff[1024];
+        // int readsize = read(fd[0],buff,sizeof(buff));
+        // write(fd2[1],buff,readsize);
+
+        dup2(fd2[1],1);
+        close(fd2[0]);
+        close(fd2[1]);
+
+        execlp(&quot;grep&quot;,&quot;grep&quot;,&quot;root&quot;,NULL);
+    }
+    if(tid1&gt;0) //wc
+    {
+        dup2(fd2[0],0);
+        close(fd2[0]);
+        close(fd2[1]);
+
+        dup2(std_out,1);
+        execlp(&quot;wc&quot;,&quot;wc&quot;,&quot;-l&quot;,NULL);
+    }
+    return 0;
+}
+
+</div></code></pre>
+<h3 id="4-computepic----%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">4. computePI.c -- 多线程 + 参数传递</h3>
+<ul>
+<li>使用 N 个线程根据莱布尼兹级数计算 PI</li>
+</ul>
+<ul>
+<li>与上一题类似，但本题更加通用化，能适应 N 个核心，需要使用线程参数来实现</li>
+<li>主线程创建 N 个辅助线程</li>
+<li>每个辅助线程计算一部分任务，并将结果返回</li>
+<li>主线程等待 N 个辅助线程运行结束，将所有辅助线程的结果累加</li>
+</ul>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+
+#define NUMBER 1000000
+#define WORKERNUM 100
+
+struct param{
+    int start;
+    int end;
+    double result;
+};
+
+void *worker(void *arg){
+    int i;
+    struct param *param =  (struct param *) arg;
+    for (i = param-&gt;start; i &lt;= param-&gt;end;i++){
+        if(i%2 == 0)
+            param-&gt;result -= 1/(2 * (double)i - 1);
+        else
+            param-&gt;result += 1/(2 * (double)i - 1);
+    }
+
+}
+
+
+
+void master()
+{
+    int i;
+    pthread_t worker_tids[WORKERNUM];
+    struct param params[WORKERNUM];
+    double  PI = 0.0;
+
+    for(i = 0;i &lt; WORKERNUM;i++)
+    {
+        struct param *param = &amp;params[i];
+        param-&gt;start = i * NUMBER + 1;
+        param-&gt;end = (i+1) * NUMBER;
+        param-&gt;result = 0;
+        pthread_create(&amp;worker_tids[i],NULL,worker,(void *)&amp;params[i]);
+        pthread_join(worker_tids[i],NULL);
+        PI += param-&gt;result;
+    }
+    PI = PI * 4;
+    printf(&quot;PI;%lf\n&quot;,PI);
+}
+
+int main()
+{
+    master();
+    return 0;
+}
+
+</div></code></pre>
+<h3 id="5-pc1c-%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E8%A7%A3%E5%86%B3%E7%94%9F%E4%BA%A7%E8%80%85%E3%80%81%E8%AE%A1%E7%AE%97%E8%80%85%E3%80%81%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98----%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E4%BF%A1%E5%8F%B7%E9%87%8F%E3%80%81%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F">5 pc1.c: 使用条件变量解决生产者、计算者、消费者问题 -- 多线程 + 信号量、条件变量</h3>
+<ul>
+<li>系统中有 3 个线程：生产者、计算者、消费者</li>
+<li>系统中有 2 个容量为 4 的缓冲区：buffer1、buffer2</li>
+<li>生产者生产'a'、'b'、'c'、‘d'、'e'、'f'、'g'、'h'八*个字符，放入到 buffer1</li>
+<li>计算者从 buffer1 取出字符，将小写字符转换为大写字符，放入到 buffer2</li>
+<li>消费者从 buffer2 取出字符，将其打印到屏幕上</li>
+</ul>
+<h4 id="341-pc1-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.4.1 pc1 实验代码</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+#define CAPACITY 4
+
+char buffer1[CAPACITY];
+char buffer2[CAPACITY];
+int in1,out1;
+int in2,out2;
+
+int buffer_is_empty(int index){
+    if(index == 1)
+        return in1 == out1;
+    if(index == 2)
+        return in2 == out2;
+    else
+        printf(&quot;Don`t exist this buffer!,Empty&quot;);
+}
+
+int buffer_is_full(int index){
+    if(index == 1)
+        return (in1 + 1) % CAPACITY == out1;
+    if(index == 2)
+        return (in2 + 1) % CAPACITY == out2;
+    else
+        printf(&quot;Don`t exist this buffer!,Full&quot;);
+}
+char get_item(int index){
+    char item;
+    if(index == 1){
+        item = buffer1[out1];
+        out1 = (out1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        item = buffer2[out2];
+        out2 = (out2 + 1) % CAPACITY;
+    }
+    //else
+    //  printf(&quot;Don`t exist this buffer!,Get%d\n&quot;,index);
+    return item;
+}
+
+void put_item(char item, int index){
+    if(index == 1){
+        buffer1[in1] = item;
+        in1 = (in1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        buffer2[in2] = item;
+        in2 = (in2 + 1) % CAPACITY;
+    }
+    //else
+    //    printf(&quot;Don`t exist this buffer!Put%c  %d\n&quot;,item,index);
+}
+
+pthread_mutex_t mutex1,mutex2;
+pthread_cond_t wait_empty_buffer1;
+pthread_cond_t wait_full_buffer1;
+pthread_cond_t wait_empty_buffer2;
+pthread_cond_t wait_full_buffer2;
+
+
+volatile int global = 0;
+
+#define ITEM_COUNT 8
+
+void *produce(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex1);
+        while(buffer_is_full(1))
+            pthread_cond_wait(&amp;wait_empty_buffer1, &amp;mutex1);
+        item = 'a' + i;
+        put_item(item,1);
+        printf(&quot;produce item:%c\n&quot;,item);
+
+        pthread_cond_signal(&amp;wait_full_buffer1);
+        pthread_mutex_unlock(&amp;mutex1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex1);
+        while(buffer_is_empty(1))
+            pthread_cond_wait(&amp;wait_full_buffer1, &amp;mutex1);
+        item = get_item(1);
+        //printf(&quot;    compute get item:%c\n&quot;,item);
+        pthread_cond_signal(&amp;wait_empty_buffer1);
+        pthread_mutex_unlock(&amp;mutex1);
+
+        item -= 32;
+
+		pthread_mutex_lock(&amp;mutex2);
+        while(buffer_is_full(2))
+            pthread_cond_wait(&amp;wait_empty_buffer2, &amp;mutex2);
+        put_item(item,2);
+        printf(&quot;    compute put item:%c\n&quot;, item);
+        pthread_cond_signal(&amp;wait_full_buffer2);
+        pthread_mutex_unlock(&amp;mutex2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex2);
+        while(buffer_is_empty(2))
+            pthread_cond_wait(&amp;wait_full_buffer2, &amp;mutex2);
+        item = get_item(2);
+        printf(&quot;            comsume item:%c\n&quot;, item);
+
+        pthread_cond_signal(&amp;wait_empty_buffer2);
+        pthread_mutex_unlock(&amp;mutex2);
+    }
+    return NULL;
+}
+
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+	pthread_create(&amp;tids[0],NULL,produce,NULL);
+    pthread_create(&amp;tids[1],NULL,compute,NULL);
+    pthread_create(&amp;tids[2],NULL,consume,NULL);
+
+    pthread_mutex_init(&amp;mutex1, NULL);
+	pthread_mutex_init(&amp;mutex2, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer1, NULL);
+    pthread_cond_init(&amp;wait_full_buffer1, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer2, NULL);
+    pthread_cond_init(&amp;wait_full_buffer2, NULL);
+
+    for(i = 0;i &lt; 3;i++)
+        pthread_join(tids[i],NULL);
+    pthread_mutex_destroy(&amp;mutex1);
+	pthread_mutex_destroy(&amp;mutex2);
+
+
+    return 0;
+}
+</div></code></pre>
+<h4 id="342-pc2-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.4.2 pc2 实验结果</h4>
+<p><img src="https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/26/5d12dae722aa3.png" alt="pc1.png"></p>
+<h4 id="343-pc2-%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.4.3 pc2 实验思路</h4>
+<h5 id="%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">实验思路</h5>
+<p>(1) 定义两个容量为 4 的 buffer：buffer1 与 buffer2。计算者从 buffer1 取出字符，将小写字符转换为大写字符，放入到 buffer2。消费者从 buffer2 取出字符，将其打印到屏幕上。定义互斥信号量用于进程间互斥，定义条件变量用于进程间同步</p>
+<pre class="hljs"><code><div>#define CAPACITY 4                  //缓冲区的大小
+#define ITEM_COUNT 8                //字符的数量
+char buffer1[CAPACITY];
+char buffer2[CAPACITY];
+int in1,out1;                       //定义当前buffer1的读指针和写指针
+int in2,out2;                       //定义当前buffer2的读指针和写指针
+pthread_mutex_t mutex1,mutex2;      //定义互斥信号量
+pthread_cond_t wait_empty_buffer1;
+pthread_cond_t wait_full_buffer1;   //定义条件变量用于produce与compute之间的同步
+pthread_cond_t wait_empty_buffer2;
+pthread_cond_t wait_full_buffer2;   //定义条件变量用于compute与consume之间的同步
+</div></code></pre>
+<p>(2) produce 程序作为 buffer1 的生产者，在操作之前给 buffer1 加锁并将数据存入。</p>
+<pre class="hljs"><code><div>void *produce(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex);                         //对互斥锁进行加锁
+        while(buffer_is_full(1))
+            pthread_cond_wait(&amp;wait_empty_buffer1, &amp;mutex); //P操作：若buffer1满了就等待其为空
+        item = 'a' + i;
+        put_item(item,1);
+        printf(&quot;produce item:%c\n&quot;,item);
+
+        pthread_cond_signal(&amp;wait_full_buffer1);            //V操作：将buffer1的数据缓冲区数目(wait_full_buffer1) + 1
+        pthread_mutex_unlock(&amp;mutex);                       //释放信号量
+    }
+    return NULL;
+}
+</div></code></pre>
+<p>(3) compute 程序先作为 buffer1 的消费者，给 buffer1 加锁并取数；计算者将小写字母变成大写字母；计最后再作为 buffer2 的生产者，给 buffer2 加锁并存数。</p>
+<pre class="hljs"><code><div>void *compute(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex1);                        //对信号量1加锁
+        while(buffer_is_empty(1))
+            pthread_cond_wait(&amp;wait_full_buffer1, &amp;mutex1); //P操作：若buffer1为空则持续等待
+        item = get_item(1);
+        //printf(&quot;    compute get item:%c\n&quot;,item);
+        pthread_cond_signal(&amp;wait_empty_buffer1);           //V操作：将buffer1的数据缓冲区数目(wait_empty_buffer1)-1
+        pthread_mutex_unlock(&amp;mutex1);                      //释放信号量1
+
+        item -= 32;
+
+        pthread_mutex_lock(&amp;mutex2);                        //对信号量2加锁
+        while(buffer_is_full(2))
+            pthread_cond_wait(&amp;wait_empty_buffer2, &amp;mutex2);//P操作：若buffer2满了则持续等待
+        put_item(item,2);
+        printf(&quot;    compute put item:%c\n&quot;, item);
+        pthread_cond_signal(&amp;wait_full_buffer2);            //V操作：将buffer2的数据缓冲区数目(wait_full_buffer2)+1
+        pthread_mutex_unlock(&amp;mutex2);                      //释放信号量2
+    }
+    return NULL;
+}
+</div></code></pre>
+<p>(4)消费者作为 buffer2 的消费者，给 buffer2 加锁并取数字。</p>
+<pre class="hljs"><code><div>void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        pthread_mutex_lock(&amp;mutex2);                        //对信号量2加锁
+        while(buffer_is_empty(2))
+            pthread_cond_wait(&amp;wait_full_buffer2, &amp;mutex2); //P操作：若buffer2为空则持续等待
+        item = get_item(2);
+        printf(&quot;            comsume item:%c\n&quot;, item);
+        pthread_cond_signal(&amp;wait_empty_buffer2);           //V操作：将buffer2的数据缓冲区数目(wait_empty_buffer2)-1
+        pthread_mutex_unlock(&amp;mutex2);                      //释放信号量2
+    }
+    return NULL;
+}
+</div></code></pre>
+<p>(5)在主函数中创建三个线程分别用于承担生产者，计算者与消费者。对线程进行初始化，并且定义两个锁用于线程间互斥，再定义四个信号量用于线程间同步，再将三个进程都调用 pthread_join()函数等待线程结束，最终对互斥锁进行注销。</p>
+<pre class="hljs"><code><div>int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+	pthread_create(&amp;tids[0],NULL,produce,NULL);
+    pthread_create(&amp;tids[1],NULL,compute,NULL);
+    pthread_create(&amp;tids[2],NULL,consume,NULL);
+
+    pthread_mutex_init(&amp;mutex1, NULL);
+	pthread_mutex_init(&amp;mutex2, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer1, NULL);
+    pthread_cond_init(&amp;wait_full_buffer1, NULL);
+    pthread_cond_init(&amp;wait_empty_buffer2, NULL);
+    pthread_cond_init(&amp;wait_full_buffer2, NULL);
+
+    for(i = 0;i &lt; 3;i++)
+        pthread_join(tids[i],NULL);
+    pthread_mutex_destroy(&amp;mutex1);
+	pthread_mutex_destroy(&amp;mutex2);
+
+    return 0;
+}
+</div></code></pre>
+<h3 id="6-pc2c-%E4%BD%BF%E7%94%A8%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%A7%A3%E5%86%B3%E7%94%9F%E4%BA%A7%E8%80%85%E3%80%81%E8%AE%A1%E7%AE%97%E8%80%85%E3%80%81%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98----%E5%A4%9A%E8%BF%9B%E7%A8%8B-%E4%BF%A1%E5%8F%B7%E9%87%8F%E3%80%81%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F">6 pc2.c: 使用信号量解决生产者、计算者、消费者问题 -- 多进程 + 信号量、条件变量</h3>
+<ul>
+<li>功能和前面的实验相同，使用信号量解决</li>
+</ul>
+<h4 id="351-pc2-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81">3.5.1 pc2 实验代码</h4>
+<pre class="hljs"><code><div>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;pthread.h&gt;
+#define CAPACITY 4
+
+char buffer1[CAPACITY];
+char buffer2[CAPACITY];
+int in1,out1;
+int in2,out2;
+
+int buffer_is_empty(int index){
+    if(index == 1)
+        return in1 == out1;
+    if(index == 2)
+        return in2 == out2;
+    else
+        printf(&quot;Don`t exist this buffer!,Empty&quot;);
+}
+
+int buffer_is_full(int index){
+    if(index == 1)
+        return (in1 + 1) % CAPACITY == out1;
+    if(index == 2)
+        return (in2 + 1) % CAPACITY == out2;
+    else
+        printf(&quot;Don`t exist this buffer!,Full&quot;);
+}
+char get_item(int index){
+    char item;
+    if(index == 1){
+        item = buffer1[out1];
+        out1 = (out1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        item = buffer2[out2];
+        out2 = (out2 + 1) % CAPACITY;
+    }
+    //else
+    //  printf(&quot;Don`t exist this buffer!,Get%d\n&quot;,index);
+    return item;
+}
+
+void put_item(char item, int index){
+    if(index == 1){
+        buffer1[in1] = item;
+        in1 = (in1 + 1) % CAPACITY;
+    }
+    if(index == 2){
+        buffer2[in2] = item;
+        in2 = (in2 + 1) % CAPACITY;
+    }
+    //else
+    //    printf(&quot;Don`t exist this buffer!Put%c  %d\n&quot;,item,index);
+}
+
+typedef struct{
+    int value;
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+}sema_t;
+
+void sema_init(sema_t *sema, int value){
+    sema-&gt;value = value;
+    pthread_mutex_init(&amp;sema-&gt;mutex, NULL);
+    pthread_cond_init(&amp;sema-&gt;cond, NULL);
+}
+
+void sema_wait(sema_t *sema){
+    pthread_mutex_lock(&amp;sema-&gt;mutex);
+    while(sema-&gt;value &lt;= 0)
+        pthread_cond_wait(&amp;sema-&gt;cond, &amp;sema-&gt;mutex);
+    sema-&gt;value--;
+    pthread_mutex_unlock(&amp;sema-&gt;mutex);
+}
+
+void sema_signal(sema_t *sema){
+    pthread_mutex_lock(&amp;sema-&gt;mutex);
+    ++sema-&gt;value;
+    pthread_cond_signal(&amp;sema-&gt;cond);
+    pthread_mutex_unlock(&amp;sema-&gt;mutex);
+}
+
+sema_t mutex_sema1,mutex_sema2;
+sema_t empty_buffer_sema1;
+sema_t full_buffer_sema1;
+sema_t empty_buffer_sema2;
+sema_t full_buffer_sema2;
+
+volatile int global = 0;
+
+#define ITEM_COUNT 8
+
+void *produce(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        sema_wait(&amp;empty_buffer_sema1);
+        sema_wait(&amp;mutex_sema1);
+
+        item = 'a' + i;
+        put_item(item,1);
+        printf(&quot;produce item:%c\n&quot;,item);
+
+        sema_signal(&amp;mutex_sema1);
+        sema_signal(&amp;full_buffer_sema1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        sema_wait(&amp;full_buffer_sema1);
+        sema_wait(&amp;mutex_sema1);
+
+        item = get_item(1);
+        // printf(&quot;    compute get item:%c\n&quot;,item);
+
+        sema_signal(&amp;mutex_sema1);
+        sema_signal(&amp;empty_buffer_sema1);
+
+        item -= 32;
+
+        sema_wait(&amp;empty_buffer_sema2);
+        sema_wait(&amp;mutex_sema2);
+
+        put_item(item,2);
+        printf(&quot;    compute put item:%c\n&quot;, item);
+
+        sema_signal(&amp;mutex_sema2);
+        sema_signal(&amp;full_buffer_sema2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+
+        sema_wait(&amp;full_buffer_sema2);
+        sema_wait(&amp;mutex_sema2);
+
+        item = get_item(2);
+        printf(&quot;            comsume item:%c\n&quot;, item);
+
+        sema_signal(&amp;mutex_sema2);
+        sema_signal(&amp;empty_buffer_sema2);
+    }
+    return NULL;
+}
+
+int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+
+    sema_init(&amp;mutex_sema1, 1);
+	sema_init(&amp;mutex_sema2, 1);
+    sema_init(&amp;empty_buffer_sema1,CAPACITY - 1);
+    sema_init(&amp;full_buffer_sema1,0);
+    sema_init(&amp;empty_buffer_sema2,CAPACITY - 1);
+    sema_init(&amp;full_buffer_sema1,0);
+
+
+	pthread_create(&amp;tids[0],NULL,produce,NULL);
+    pthread_create(&amp;tids[1],NULL,compute,NULL);
+    pthread_create(&amp;tids[2],NULL,consume,NULL);
+
+    for(i = 0;i &lt; 3;i++)
+        pthread_join(tids[i],NULL);
+
+
+    return 0;
+}
+</div></code></pre>
+<h4 id="353-pc2-%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF">3.5.3 pc2 实验思路</h4>
+<p>(1) 信号量的实现</p>
+<p>此题与上题思路相同，区别在于实现的时候利用信号量。信号量的定义、初始化、wait 和 signal 定义如下，初始化时可以送入信号量的初始个数，wait 一次减少一次信号量个数，signal 一次则增加一次信号量个数。</p>
+<pre class="hljs"><code><div>typedef struct{
+    int value;
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+}sema_t;
+
+void sema_init(sema_t *sema, int value){
+    sema-&gt;value = value;
+    pthread_mutex_init(&amp;sema-&gt;mutex, NULL);
+    pthread_cond_init(&amp;sema-&gt;cond, NULL);
+}
+
+void sema_wait(sema_t *sema){
+    pthread_mutex_lock(&amp;sema-&gt;mutex);
+    while(sema-&gt;value &lt;= 0)
+        pthread_cond_wait(&amp;sema-&gt;cond, &amp;sema-&gt;mutex);
+    sema-&gt;value--;
+    pthread_mutex_unlock(&amp;sema-&gt;mutex);
+}
+
+void sema_signal(sema_t *sema){
+    pthread_mutex_lock(&amp;sema-&gt;mutex);
+    ++sema-&gt;value;
+    pthread_cond_signal(&amp;sema-&gt;cond);
+    pthread_mutex_unlock(&amp;sema-&gt;mutex);
+}
+</div></code></pre>
+<p>(2)定义信号量并使用</p>
+<p>定义两个信号量 mutex_sema1,mutex_sema2，分别对(生产者-计算者)与(计算者-消费者)进行线程间互斥。此外也定义了四个信号量
+对共享变量 buffer1,buffer2 进行线程间同步。</p>
+<p>在生产者、计算者、消费者的函数中，先进行 P 操作等待互斥信号量(上锁)，再 P 操作获取同步信号量，对 buffer 中的数据进行操作后，V 操作释放互斥信号量及同步信号量(解锁)。这里值得注意的是，需要 P 操作需要先获取同步信号量再对互斥信号量进行上锁，不然可能造饥饿的现象。</p>
+<pre class="hljs"><code><div>sema_t mutex_sema1,mutex_sema2;
+sema_t empty_buffer_sema1;
+sema_t full_buffer_sema1;
+sema_t empty_buffer_sema2;
+sema_t full_buffer_sema2;
+void *produce(void *arg){
+    int i;
+    char item;
+
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        sema_wait(&amp;empty_buffer_sema1);
+        sema_wait(&amp;mutex_sema1);
+
+        item = 'a' + i;
+        put_item(item,1);
+        printf(&quot;produce item:%c\n&quot;,item);
+
+        sema_signal(&amp;mutex_sema1);
+        sema_signal(&amp;full_buffer_sema1);
+    }
+    return NULL;
+}
+void *compute(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+        sema_wait(&amp;full_buffer_sema1);
+        sema_wait(&amp;mutex_sema1);
+
+        item = get_item(1);
+        // printf(&quot;    compute get item:%c\n&quot;,item);
+
+        sema_signal(&amp;mutex_sema1);
+        sema_signal(&amp;empty_buffer_sema1);
+
+        item -= 32;
+
+        sema_wait(&amp;empty_buffer_sema2);
+        sema_wait(&amp;mutex_sema2);
+
+        put_item(item,2);
+        printf(&quot;    compute put item:%c\n&quot;, item);
+
+        sema_signal(&amp;mutex_sema2);
+        sema_signal(&amp;full_buffer_sema2);
+    }
+    return NULL;
+}
+
+void *consume(void *arg){
+    int i;
+    char item;
+    for(i = 0;i &lt; ITEM_COUNT;i++){
+
+        sema_wait(&amp;full_buffer_sema2);
+        sema_wait(&amp;mutex_sema2);
+
+        item = get_item(2);
+        printf(&quot;            comsume item:%c\n&quot;, item);
+
+        sema_signal(&amp;mutex_sema2);
+        sema_signal(&amp;empty_buffer_sema2);
+    }
+    return NULL;
+}
+</div></code></pre>
+<p>(3) main 函数中开启三个线程分别对应生产者、计算者、消费者，再对两个互斥信号量以及四个同步信号量进行初始化，调用 pthread_join 函数等待三个进程的结束即可。</p>
+<pre class="hljs"><code><div>int main(){
+    int i;
+    in1 = 0;
+    in2 = 0;
+    out1 = 0;
+    out2 = 0;
+    pthread_t tids[3];
+
+    sema_init(&amp;mutex_sema1, 1);
+	sema_init(&amp;mutex_sema2, 1);
+    sema_init(&amp;empty_buffer_sema1,CAPACITY - 1);
+    sema_init(&amp;full_buffer_sema1,0);
+    sema_init(&amp;empty_buffer_sema2,CAPACITY - 1);
+    sema_init(&amp;full_buffer_sema1,0);
+
+
+	pthread_create(&amp;tids[0],NULL,produce,NULL);
+    pthread_create(&amp;tids[1],NULL,compute,NULL);
+    pthread_create(&amp;tids[2],NULL,consume,NULL);
+
+    for(i = 0;i &lt; 3;i++)
+        pthread_join(tids[i],NULL);
+
+
+    return 0;
+}
+
+</div></code></pre>
+
+</body>
+</html>
